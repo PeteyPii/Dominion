@@ -170,7 +170,7 @@ std::vector<Card*> OrderedDeck::getListOfCardsMatchingID(Card::CardIDs cardID)
 
 	for(unsigned int ii = 0; ii < cards.size(); ii++)
 	{
-		if(cards[ii].cardID = cardID)	// Card matches id from argument
+		if(cards[ii].cardID == cardID)	// Card matches id from argument
 		{
 			cardList.push_back(&cards[ii]);
 		}

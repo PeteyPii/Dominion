@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\Card.cpp" />
+    <ClCompile Include="src\CardDefinition.cpp" />
+    <ClCompile Include="src\Cards.cpp" />
+    <ClCompile Include="src\cards\AdventurerCard.cpp" />
+    <ClCompile Include="src\cards\BureaucratCard.cpp" />
+    <ClCompile Include="src\cards\CellarCard.cpp" />
+    <ClCompile Include="src\cards\ChancellorCard.cpp" />
+    <ClCompile Include="src\cards\ChapelCard.cpp" />
+    <ClCompile Include="src\cards\CopperCard.cpp" />
+    <ClCompile Include="src\cards\CouncilRoomCard.cpp" />
+    <ClCompile Include="src\cards\CurseCard.cpp" />
+    <ClCompile Include="src\cards\DuchyCard.cpp" />
+    <ClCompile Include="src\cards\EstateCard.cpp" />
+    <ClCompile Include="src\cards\FeastCard.cpp" />
+    <ClCompile Include="src\cards\FestivalCard.cpp" />
+    <ClCompile Include="src\cards\GardensCard.cpp" />
+    <ClCompile Include="src\cards\GoldCard.cpp" />
+    <ClCompile Include="src\cards\LaboratoryCard.cpp" />
+    <ClCompile Include="src\cards\LibraryCard.cpp" />
+    <ClCompile Include="src\cards\MarketCard.cpp" />
+    <ClCompile Include="src\cards\MilitiaCard.cpp" />
+    <ClCompile Include="src\cards\MineCard.cpp" />
+    <ClCompile Include="src\cards\MoatCard.cpp" />
+    <ClCompile Include="src\cards\MoneylenderCard.cpp" />
+    <ClCompile Include="src\cards\ProvinceCard.cpp" />
+    <ClCompile Include="src\cards\RemodelCard.cpp" />
+    <ClCompile Include="src\cards\SilverCard.cpp" />
+    <ClCompile Include="src\cards\SmithyCard.cpp" />
+    <ClCompile Include="src\cards\SpyCard.cpp" />
+    <ClCompile Include="src\cards\ThiefCard.cpp" />
+    <ClCompile Include="src\cards\ThroneRoomCard.cpp" />
+    <ClCompile Include="src\cards\VillageCard.cpp" />
+    <ClCompile Include="src\cards\WitchCard.cpp" />
+    <ClCompile Include="src\cards\WoodcutterCard.cpp" />
+    <ClCompile Include="src\cards\WorkshopCard.cpp" />
+    <ClCompile Include="src\Decision.cpp" />
+    <ClCompile Include="src\Dominion.cpp" />
+    <ClCompile Include="src\mtrand.cpp" />
+    <ClCompile Include="src\OrderedDeck.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\RandomNumber.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\AllCardTypes.h" />
+    <ClInclude Include="include\Board.h" />
+    <ClInclude Include="include\Card.h" />
+    <ClInclude Include="include\CardDefinition.h" />
+    <ClInclude Include="include\Cards.h" />
+    <ClInclude Include="include\cards\AdventurerCard.h" />
+    <ClInclude Include="include\cards\BureaucratCard.h" />
+    <ClInclude Include="include\cards\CellarCard.h" />
+    <ClInclude Include="include\cards\ChancellorCard.h" />
+    <ClInclude Include="include\cards\ChapelCard.h" />
+    <ClInclude Include="include\cards\CopperCard.h" />
+    <ClInclude Include="include\cards\CouncilRoomCard.h" />
+    <ClInclude Include="include\cards\CurseCard.h" />
+    <ClInclude Include="include\cards\DuchyCard.h" />
+    <ClInclude Include="include\cards\EstateCard.h" />
+    <ClInclude Include="include\cards\FeastCard.h" />
+    <ClInclude Include="include\cards\FestivalCard.h" />
+    <ClInclude Include="include\cards\GardensCard.h" />
+    <ClInclude Include="include\cards\GoldCard.h" />
+    <ClInclude Include="include\cards\LaboratoryCard.h" />
+    <ClInclude Include="include\cards\LibraryCard.h" />
+    <ClInclude Include="include\cards\MarketCard.h" />
+    <ClInclude Include="include\cards\MilitiaCard.h" />
+    <ClInclude Include="include\cards\MineCard.h" />
+    <ClInclude Include="include\cards\MoatCard.h" />
+    <ClInclude Include="include\cards\MoneylenderCard.h" />
+    <ClInclude Include="include\cards\ProvinceCard.h" />
+    <ClInclude Include="include\cards\RemodelCard.h" />
+    <ClInclude Include="include\cards\SilverCard.h" />
+    <ClInclude Include="include\cards\SmithyCard.h" />
+    <ClInclude Include="include\cards\SpyCard.h" />
+    <ClInclude Include="include\cards\ThiefCard.h" />
+    <ClInclude Include="include\cards\ThroneRoomCard.h" />
+    <ClInclude Include="include\cards\VillageCard.h" />
+    <ClInclude Include="include\cards\WitchCard.h" />
+    <ClInclude Include="include\cards\WoodcutterCard.h" />
+    <ClInclude Include="include\cards\WorkshopCard.h" />
+    <ClInclude Include="include\Decision.h" />
+    <ClInclude Include="include\mtrand.h" />
+    <ClInclude Include="include\OrderedDeck.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\RandomNumber.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D77C4125-A73B-4193-ABD6-590ED345DE46}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Dominion</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -19,7 +19,11 @@ Player::~Player()
 }
 void Player::displayMessage(string &messageOutput, bool responseRequired)
 {
-	cout << messageOutput;
+	cout << name << " <- " << messageOutput;
+
+	sf::Packet sendPacket;
+	sendPacket << responseRequired << messageOutput;
+	socket.send(sendPacket);
 }
 void Player::broadcastToOtherPlayers(std::string &messageOutput)
 {
@@ -30,9 +34,18 @@ void Player::broadcastToOtherPlayers(std::string &messageOutput)
 }
 string Player::getInput()
 {
-	string keyboardInput;
+	/*string keyboardInput;
 	getline(cin, keyboardInput);
-	return keyboardInput;
+	cout << name << " -> " << keyboardInput;
+	return keyboardInput;*/
+
+	sf::Packet receivedPacket;
+	socket.receive(receivedPacket);
+
+	string receivedText;
+	receivedPacket >> receivedText;
+	cout << name << " -> " << receivedText;
+	return receivedText;
 }
 void Player::outputStats()
 {

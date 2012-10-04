@@ -113,7 +113,7 @@ int main()
 		}
 	}
 
-	Board boardGame(10, 10, maxValue(3, numberOfPlayers * 0.5 + 2), maxValue(8, numberOfPlayers * 4), maxValue(10, numberOfPlayers * 10 - 10), 30, initPlayers);
+	Board boardGame(10, 10, maxValue(3, (int)(numberOfPlayers * 0.5 + 2)), maxValue(8, numberOfPlayers * 4), maxValue(10, numberOfPlayers * 10 - 10), 30, initPlayers);
 
 	boardGame.beginGame();
 

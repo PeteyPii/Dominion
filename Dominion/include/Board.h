@@ -36,7 +36,7 @@ public:
 
 	int cardCost;
 	
-	Board(int numberOfDecks, int cardsPerDeck, int maxKingdomDecksGone, int numberOfVictoryCards, int numberOfCurseCards, int numberOfTreasureCards, std::vector<std::string> &playerNames);
+	Board(int numberOfDecks, int cardsPerDeck, int maxKingdomDecksGone, int numberOfVictoryCards, int numberOfCurseCards, int numberOfTreasureCards, std::vector<Player> &undefinedPlayers);
 	~Board();
 
 	void beginGame();

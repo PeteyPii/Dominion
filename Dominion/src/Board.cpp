@@ -34,7 +34,7 @@ Board::Board()
 {
 
 }
-Board::Board(int numberOfDecks, int cardsPerDeck, int maxDecksGone, int numberOfVictoryCards, int numberOfCurseCards, int numberOfTreasureCards, std::vector<std::string> &playerNames)
+Board::Board(int numberOfDecks, int cardsPerDeck, int maxDecksGone, int numberOfVictoryCards, int numberOfCurseCards, int numberOfTreasureCards, std::vector<Player> &undefinedPlayers)
 {
 	boardGame = this;
 
@@ -97,12 +97,12 @@ Board::Board(int numberOfDecks, int cardsPerDeck, int maxDecksGone, int numberOf
 		curseDecks[ii].endOfDeckCallback = lastCardOfDeckDrawn;
 	}
 
-	for(unsigned int ii = 0; ii < playerNames.size(); ii++)
+	for(unsigned int ii = 0; ii < undefinedPlayers.size(); ii++)
 	{
 		Player tempPlayer;
 
 		stringstream converter;
-		converter << playerNames[ii];
+		converter << undefinedPlayers[ii];
 		tempPlayer.name = converter.str();
 
 		OrderedDeck startingDeck;
@@ -133,9 +133,9 @@ Board::Board(int numberOfDecks, int cardsPerDeck, int maxDecksGone, int numberOf
 		players[ii].fixCointainerDeckPointersOfCards();
 	}
 
-	for(unsigned int ii = 0; ii < playerNames.size(); ii++)
+	for(unsigned int ii = 0; ii < undefinedPlayers.size(); ii++)
 	{
-		for(unsigned int jj = ii + 1; jj < playerNames.size() + ii; jj++)
+		for(unsigned int jj = ii + 1; jj < undefinedPlayers.size() + ii; jj++)
 		{
 			players[ii].otherPlayers.push_back(&players[cyclePlayerNumber(jj)]);
 		}

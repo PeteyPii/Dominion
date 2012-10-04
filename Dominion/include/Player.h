@@ -2,6 +2,7 @@
 
 #include "OrderedDeck.h"
 #include <iostream>
+#include <SFML/Network.hpp>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -18,6 +19,8 @@ public:
 	OrderedDeck cleanupPile;
 	OrderedDeck discardPile;
 	std::vector<Player*> otherPlayers;
+
+	sf::TcpSocket socket;
 
 	Player();
 	~Player();

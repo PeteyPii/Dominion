@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dominion", "Dominion\Dominion.vcxproj", "{D77C4125-A73B-4193-ABD6-590ED345DE46}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DominionClient", "DominionClient\DominionClient.vcxproj", "{C7CCC837-3AF5-4393-B953-A776AA4D712B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +15,10 @@ Global
 		{D77C4125-A73B-4193-ABD6-590ED345DE46}.Debug|Win32.Build.0 = Debug|Win32
 		{D77C4125-A73B-4193-ABD6-590ED345DE46}.Release|Win32.ActiveCfg = Release|Win32
 		{D77C4125-A73B-4193-ABD6-590ED345DE46}.Release|Win32.Build.0 = Release|Win32
+		{C7CCC837-3AF5-4393-B953-A776AA4D712B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C7CCC837-3AF5-4393-B953-A776AA4D712B}.Debug|Win32.Build.0 = Debug|Win32
+		{C7CCC837-3AF5-4393-B953-A776AA4D712B}.Release|Win32.ActiveCfg = Release|Win32
+		{C7CCC837-3AF5-4393-B953-A776AA4D712B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

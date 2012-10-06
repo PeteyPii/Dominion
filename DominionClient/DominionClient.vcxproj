@@ -62,6 +62,12 @@
       <AdditionalLibraryDirectories>$(SFML_HOME)\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Manifest>
+      <OutputManifestFile>obj\$(Configuration)\$(TargetName)$(TargetExt).embed.manifest</OutputManifestFile>
+    </Manifest>
+    <ManifestResourceCompile>
+      <ResourceOutputFileName>obj\$(Configuration)\$(TargetName)$(TargetExt).embed.manifest.res</ResourceOutputFileName>
+    </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -82,8 +88,12 @@
       <AdditionalLibraryDirectories>$(SFML_HOME)\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ManifestResourceCompile>
+      <ResourceOutputFileName>obj\$(Configuration)\$(TargetName)$(TargetExt).embed.manifest.res</ResourceOutputFileName>
+    </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\CommonFunctions.cpp" />
     <ClCompile Include="src\Decision.cpp" />
     <ClCompile Include="src\InstructionsState.cpp" />
     <ClCompile Include="src\DominionApp.cpp" />
@@ -93,6 +103,7 @@
     <ClCompile Include="src\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\CommonFunctions.h" />
     <ClInclude Include="include\Decision.h" />
     <ClInclude Include="include\DominionApp.h" />
     <ClInclude Include="include\GameplayState.h" />

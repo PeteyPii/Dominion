@@ -1,7 +1,6 @@
 #pragma once
 
 #include "State.h"
-#include <iostream>
 
 class GameplayState : public State
 {

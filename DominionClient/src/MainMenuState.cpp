@@ -1,7 +1,9 @@
 #include "MainMenuState.h"
 
+#include "CommonFunctions.h"
 #include "Decision.h"
 #include "DominionApp.h"
+#include <iostream>
 
 using namespace std;
 
@@ -15,6 +17,8 @@ MainMenuState::~MainMenuState(void)
 }
 void MainMenuState::runState()
 {
+	CommonFunctions::ClearScreen();
+
 	cout << "______________________" << endl;
 	cout << "|                    |" << endl;
 	cout << "|   DOMINION         |" << endl;

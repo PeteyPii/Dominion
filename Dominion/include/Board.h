@@ -11,8 +11,6 @@ class Player;
 
 class Board
 {
-private:
-	Board();	// Have to use other constructor
 public:
 	static Board *boardGame;
 
@@ -20,7 +18,7 @@ public:
 	static void lastVictoryPointCardDrawn();
 	static void lastCardOfDeckDrawn();
 
-	std::vector<Player> players;
+	std::vector<Player*> players;
 	std::vector<OrderedDeck> kingdomDecks;
 	std::vector<OrderedDeck> treasureDecks;
 	std::vector<OrderedDeck> victoryPointDecks;
@@ -36,9 +34,10 @@ public:
 
 	int cardCost;
 	
-	Board(int numberOfDecks, int cardsPerDeck, int maxKingdomDecksGone, int numberOfVictoryCards, int numberOfCurseCards, int numberOfTreasureCards, std::vector<Player> &undefinedPlayers);
+	Board();
 	~Board();
 
+	void initializeGame(int numberOfDecks, int cardsPerDeck, int maxKingdomDecksGone, int numberOfVictoryCards, int numberOfCurseCards, int numberOfTreasureCards);
 	void beginGame();
 	void endGame();
 

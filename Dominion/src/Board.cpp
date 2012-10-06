@@ -32,9 +32,19 @@ void Board::lastCardOfDeckDrawn()
 }
 Board::Board()
 {
-
+	boardGame = this;
 }
-Board::Board(int numberOfDecks, int cardsPerDeck, int maxDecksGone, int numberOfVictoryCards, int numberOfCurseCards, int numberOfTreasureCards, std::vector<Player> &undefinedPlayers)
+Board::~Board()
+{
+	for(unsigned int ii = 0; ii < players.size(); ii++)
+	{
+		delete players[ii];
+	}
+
+	if(boardGame == this)
+		boardGame = 0;
+}
+void Board::initializeGame(int numberOfDecks, int cardsPerDeck, int maxKingdomDecksGone, int numberOfVictoryCards, int numberOfCurseCards, int numberOfTreasureCards)
 {
 	boardGame = this;
 
@@ -55,7 +65,7 @@ Board::Board(int numberOfDecks, int cardsPerDeck, int maxDecksGone, int numberOf
 
 		kingdomDecks[ii].endOfDeckCallback = lastCardOfDeckDrawn;
 	}
-	
+
 	for(unsigned int ii = 0; ii < treasureCards.cards.size(); ii++)
 	{
 		treasureDecks.push_back(OrderedDeck());
@@ -97,51 +107,40 @@ Board::Board(int numberOfDecks, int cardsPerDeck, int maxDecksGone, int numberOf
 		curseDecks[ii].endOfDeckCallback = lastCardOfDeckDrawn;
 	}
 
-	for(unsigned int ii = 0; ii < undefinedPlayers.size(); ii++)
+	for(unsigned int ii = 0; ii < players.size(); ii++)
 	{
-		Player tempPlayer;
-
-		stringstream converter;
-		converter << undefinedPlayers[ii];
-		tempPlayer.name = converter.str();
-
 		OrderedDeck startingDeck;
-
-		int numberOfInitialCopperCards = 7;
-		int numberOfInitialEstateCards = 3;
 
 		Card copperCard, estateCard;
 		copperCard.cardID = Card::COPPER_CARD;
 		estateCard.cardID = Card::ESTATE_CARD;
 
-		for(int jj = 0; jj < numberOfInitialCopperCards; jj++)
+		for(int jj = 0; jj < 7; jj++)
 		{
 			startingDeck.addCard(copperCard);
 		}
 
-		for(int jj = 0; jj < numberOfInitialEstateCards; jj++)
+		for(int jj = 0; jj < 3; jj++)
 		{
 			startingDeck.addCard(estateCard);
 		} 
 
 		startingDeck.shuffle();
-		tempPlayer.deck = startingDeck;
-		
-		tempPlayer.drawNewHand();
 
-		players.push_back(tempPlayer);
-		players[ii].fixCointainerDeckPointersOfCards();
+		players[ii]->deck = startingDeck;
+		players[ii]->drawNewHand();
+		players[ii]->fixCointainerDeckPointersOfCards();
 	}
 
-	for(unsigned int ii = 0; ii < undefinedPlayers.size(); ii++)
+	for(unsigned int ii = 0; ii < players.size(); ii++)
 	{
-		for(unsigned int jj = ii + 1; jj < undefinedPlayers.size() + ii; jj++)
+		for(unsigned int jj = ii + 1; jj < players.size() + ii; jj++)
 		{
-			players[ii].otherPlayers.push_back(&players[cyclePlayerNumber(jj)]);
+			players[ii]->otherPlayers.push_back(players[cyclePlayerNumber(jj)]);
 		}
 	}
 
-	maxNumberOfDecksGone = maxDecksGone;
+	maxNumberOfDecksGone = maxKingdomDecksGone;
 
 	numberOfDecksGone = 0;
 	gameIsOver = false;
@@ -151,10 +150,6 @@ Board::Board(int numberOfDecks, int cardsPerDeck, int maxDecksGone, int numberOf
 	cardCost = 0;
 
 	recreatePurchasableCards();
-}
-Board::~Board()
-{
-
 }
 void Board::beginGame()
 {
@@ -167,7 +162,7 @@ void Board::beginGame()
 			numberOfTurns++;
 		}
 
-		players[cyclePlayerNumber(turn)].playTurn();
+		players[cyclePlayerNumber(turn)]->playTurn();
 
 		turn++;
 	}
@@ -181,11 +176,11 @@ void Board::endGame()
 
 	for(unsigned int ii = 0; ii < players.size(); ii++)
 	{
-		players[ii].hand.moveContentsToAnotherDeck(players[ii].deck);
-		players[ii].discardPile.moveContentsToAnotherDeck(players[ii].deck);
-		players[ii].cleanupPile.moveContentsToAnotherDeck(players[ii].deck);
+		players[ii]->hand.moveContentsToAnotherDeck(players[ii]->deck);
+		players[ii]->discardPile.moveContentsToAnotherDeck(players[ii]->deck);
+		players[ii]->cleanupPile.moveContentsToAnotherDeck(players[ii]->deck);
 
-		int deckValue = players[ii].deck.victoryPointValueOfDeck(&players[ii]);
+		int deckValue = players[ii]->deck.victoryPointValueOfDeck(players[ii]);
 
 		if(deckValue > highestScore)
 		{
@@ -201,11 +196,11 @@ void Board::endGame()
 
 	stringstream output;
 	output << "You won the game with " << highestScore << " point" << pluralPoints <<  "." << endl;
-	players[winningPlayer].displayMessage(output.str(), false);
+	players[winningPlayer]->displayMessage(output.str(), false);
 
 	stringstream globalOutput;
-	globalOutput << players[winningPlayer].name << "  won the game with " << highestScore << " point" << pluralPoints <<  "." << endl;
-	players[winningPlayer].broadcastToOtherPlayers(globalOutput.str());
+	globalOutput << players[winningPlayer]->name << "  won the game with " << highestScore << " point" << pluralPoints <<  "." << endl;
+	players[winningPlayer]->broadcastToOtherPlayers(globalOutput.str());
 }
 OrderedDeck& Board::getPurchasableCards()
 {

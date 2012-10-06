@@ -28,26 +28,41 @@ int maxValue(int valueOne, int valueTwo)
 
 int main()
 {
-	unsigned short portNumber;
-	bool enterSocket = true;
+	unsigned short portNumber = 4521;
+	bool enterPort = true;
 
-	while(enterSocket)
+	while(enterPort)
 	{
-		cout << "Please enter the socket you wish to host the server on (2048 - 65535):" << endl;
+		cout << "Please enter the port you wish to host the server on (2048 - 65535, press enter for default):" << endl;
 
-		if(!(cin >> portNumber) || portNumber > 65535 || portNumber < 2048)
+		string input;
+		getline(cin, input);
+
+		if(input.compare("") == 0)
 		{
-			cout << "Bad input." << endl;
+			enterPort = false;
 		}
 		else
 		{
-			enterSocket = false;
+			stringstream converter;
+			converter << input;
+
+			if(!(converter >> portNumber) || portNumber > 65535 || portNumber < 2048)
+			{
+				cout << "Bad input (press enter to continue)." << endl;
+
+				getline(cin, input);
+			}
+			else
+			{
+				enterPort = false;
+			}
 		}
 	}
 
 	sf::TcpListener listener;
 
-	if (!listener.listen(portNumber))
+	if (listener.listen(portNumber) != sf::TcpListener::Done)
 	{
 		cerr << "Listening on the socket failed." << endl;
 
@@ -56,35 +71,32 @@ int main()
 
 	cout << "Listening on port " << portNumber 
 		 << " from the internal address " << sf::IpAddress::getLocalAddress() 
-		 << " and from the external address " << sf::IpAddress::getPublicAddress(sf::Time(10 * 1000 * 1000))
+		 << " and from the external address " << sf::IpAddress::getPublicAddress(sf::seconds(10))
 		 << endl;
 
-	vector<Player> initPlayers;
+	Board board;
 	int numberOfPlayers = 0;
 	bool acceptingMoreConnections = true;
 	
 	while(acceptingMoreConnections)
 	{
-		initPlayers.push_back(Player());
-		listener.accept(initPlayers[numberOfPlayers].socket);
+		board.players.push_back(new Player());
+		listener.accept(board.players[numberOfPlayers]->socket);
 
 		sf::Packet namePacket;
-		initPlayers[numberOfPlayers].socket.receive(namePacket);
-		char nameBuffer[64];
-		namePacket >> nameBuffer;
-		nameBuffer[63] = 0;
-		initPlayers[numberOfPlayers].name = nameBuffer;
+		board.players[numberOfPlayers]->socket.receive(namePacket);
+		namePacket >> board.players[numberOfPlayers]->name;
 
 		numberOfPlayers++;
 
-		for(unsigned int ii = 0; ii < numberOfPlayers; ii++)
+		for(int ii = 0; ii < numberOfPlayers; ii++)
 		{
 			stringstream output;
-			output << initPlayers[numberOfPlayers - 1].name << " has joined the lobby." << endl;
-			initPlayers[ii].displayMessage(output.str(), false);
+			output << board.players[numberOfPlayers - 1]->name << " has joined the lobby." << endl;
+			board.players[ii]->displayMessage(output.str(), false);
 		}
 
-		Decision beginGame("Start game?", &initPlayers[0]);
+		Decision beginGame("Start game?", board.players[0]);
 
 		beginGame.addOption("Yes");
 		beginGame.addOption("No");
@@ -93,34 +105,33 @@ int main()
 
 		if(decisionResult == 0)	// Yes
 		{
-			for(unsigned int ii = 0; ii < numberOfPlayers; ii++)
+			for(int ii = 0; ii < numberOfPlayers; ii++)
 			{
 				stringstream output;
 				output << "Starting the game." << endl;
-				initPlayers[ii].displayMessage(output.str(), false);
+				board.players[ii]->displayMessage(output.str(), false);
 			}
 
 			acceptingMoreConnections = false;
 		}
 		else	// No
 		{
-			for(unsigned int ii = 0; ii < numberOfPlayers; ii++)
+			for(int ii = 0; ii < numberOfPlayers; ii++)
 			{
 				stringstream output;
 				output << "Waiting for another player." << endl;
-				initPlayers[ii].displayMessage(output.str(), false);
+				board.players[ii]->displayMessage(output.str(), false);
 			}
 		}
 	}
 
-	Board boardGame(10, 10, maxValue(3, (int)(numberOfPlayers * 0.5 + 2)), maxValue(8, numberOfPlayers * 4), maxValue(10, numberOfPlayers * 10 - 10), 30, initPlayers);
-
-	boardGame.beginGame();
+	board.initializeGame(10, 10, maxValue(3, (int)(numberOfPlayers * 0.5 + 2)), maxValue(8, numberOfPlayers * 4), maxValue(10, numberOfPlayers * 10 - 10), 30);
+	board.beginGame();
 
 	cout << "Game has been finished, press ENTER to exit the application." << endl;
 
-	string buffer;
-	cin >> buffer;
+	string input;
+	getline(cin, input);
 
 	return 0;
 }

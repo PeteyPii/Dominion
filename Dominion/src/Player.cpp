@@ -15,7 +15,7 @@ Player::Player()
 }
 Player::~Player()
 {
-
+	socket.disconnect();
 }
 void Player::displayMessage(string &messageOutput, bool responseRequired)
 {
@@ -25,7 +25,7 @@ void Player::displayMessage(string &messageOutput, bool responseRequired)
 	sendPacket << responseRequired << messageOutput;
 	socket.send(sendPacket);
 }
-void Player::broadcastToOtherPlayers(std::string &messageOutput)
+void Player::broadcastToOtherPlayers(string &messageOutput)
 {
 	for(unsigned int ii = 0; ii < otherPlayers.size(); ii++)
 	{
@@ -34,11 +34,6 @@ void Player::broadcastToOtherPlayers(std::string &messageOutput)
 }
 string Player::getInput()
 {
-	/*string keyboardInput;
-	getline(cin, keyboardInput);
-	cout << name << " -> " << keyboardInput;
-	return keyboardInput;*/
-
 	sf::Packet receivedPacket;
 	socket.receive(receivedPacket);
 
@@ -124,8 +119,6 @@ void Player::playActions()
 
 	while(actions > 0 && wantsToDoSomething)
 	{
-		outputPlayerStatus();
-
 		vector<Card*> actionCards = hand.getListOfCardsMatchingType(Card::ACTION_TYPE);
 
 		if(actionCards.size() == 0)		// Has no action cards
@@ -138,6 +131,8 @@ void Player::playActions()
 		}
 		else
 		{
+			outputPlayerStatus();
+
 			Decision cardToPlayDecision("Select an ACTION card by typing the corresponding number and then press enter. The cards you can play are:", this);
 
 			for(unsigned int ii = 0; ii < actionCards.size(); ii++)

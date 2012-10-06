@@ -10,5 +10,5 @@ DominionApp::~DominionApp()
 }
 void DominionApp::begin()
 {
-
+	mainMenuState.runState();
 }

@@ -84,7 +84,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Decision.cpp" />
+    <ClCompile Include="src\InstructionsState.cpp" />
+    <ClCompile Include="src\DominionApp.cpp" />
+    <ClCompile Include="src\MainMenuState.cpp" />
+    <ClCompile Include="src\GameplayState.cpp" />
     <ClCompile Include="src\DominionClient.cpp" />
+    <ClCompile Include="src\State.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Decision.h" />
+    <ClInclude Include="include\DominionApp.h" />
+    <ClInclude Include="include\GameplayState.h" />
+    <ClInclude Include="include\State.h" />
+    <ClInclude Include="include\MainMenuState.h" />
+    <ClInclude Include="include\InstructionsState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

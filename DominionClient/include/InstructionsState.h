@@ -3,11 +3,11 @@
 #include "State.h"
 #include <iostream>
 
-class GameplayState : public State
+class InstructionsState : public State
 {
 public:
-	GameplayState();
-	~GameplayState();
+	InstructionsState();
+	~InstructionsState();
 
 	void runState();
 };

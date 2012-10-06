@@ -7,8 +7,8 @@ private:
 	~PacketID();
 
 public:
-	static unsigned short GAME_OVER;
-	static unsigned short STANDARD_MESSAGE;
-	static unsigned short CLEAR_SCREEN;
+	static const unsigned short GAME_OVER;
+	static const unsigned short STANDARD_MESSAGE;
+	static const unsigned short CLEAR_SCREEN;
 };
 

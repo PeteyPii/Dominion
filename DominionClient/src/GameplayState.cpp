@@ -59,6 +59,7 @@ void GameplayState::runState()
 			if(ipAddressString.compare("") == 0)
 			{
 				ipAddress = sf::IpAddress::LocalHost;
+				enteringIP = false;
 			}
 			else
 			{
@@ -138,12 +139,13 @@ void GameplayState::runState()
 
 			receivedPacket >> packetID;
 
-			switch(packetID)
+			if(packetID == PacketID::GAME_OVER)
 			{
-			case PacketID::GAME_OVER:
 				cout << "Game is finished. Returning to main menu." << endl;
 				return;
-			case PacketID::STANDARD_MESSAGE:
+			}
+			else if(packetID == PacketID::STANDARD_MESSAGE)
+			{
 				bool requiredResponse;
 				string message;
 
@@ -164,13 +166,10 @@ void GameplayState::runState()
 						conenctionStatusOK = false;
 					}
 				}
-
-				break;
-			case PacketID::CLEAR_SCREEN:
+			}
+			else if(packetID == PacketID::CLEAR_SCREEN)
+			{
 				CommonFunctions::ClearScreen();
-				break;
-			default:
-				throw exception
 			}
 		}
 

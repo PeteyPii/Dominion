@@ -1,7 +1,6 @@
 #pragma once
 
 #include "mtrand.h"
-#include <ctime>
 
 class RandomNumber
 {

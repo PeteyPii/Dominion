@@ -1,5 +1,7 @@
 #include "Decision.h"
 
+#include <sstream>
+
 using namespace std;
 
 Decision::Decision() 

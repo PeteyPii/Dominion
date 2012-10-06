@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DominionApp.cpp" />
     <ClCompile Include="src\PacketID.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Card.cpp" />
@@ -56,6 +57,7 @@
     <ClCompile Include="src\RandomNumber.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\DominionApp.h" />
     <ClInclude Include="include\AllCardTypes.h" />
     <ClInclude Include="include\Board.h" />
     <ClInclude Include="include\Card.h" />

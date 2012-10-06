@@ -93,6 +93,7 @@
     </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\PacketID.cpp" />
     <ClCompile Include="src\CommonFunctions.cpp" />
     <ClCompile Include="src\Decision.cpp" />
     <ClCompile Include="src\InstructionsState.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="include\State.h" />
     <ClInclude Include="include\MainMenuState.h" />
     <ClInclude Include="include\InstructionsState.h" />
+    <ClInclude Include="include\PacketID.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

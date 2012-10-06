@@ -10,6 +10,8 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 int minValue(int valueOne, int valueTwo)
 {
 	if(valueOne < valueTwo)

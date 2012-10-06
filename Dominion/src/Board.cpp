@@ -156,6 +156,11 @@ void Board::initializeGame(int numberOfDecks, int cardsPerDeck, int maxKingdomDe
 }
 void Board::beginGame()
 {
+	for(unsigned int ii = 0; ii < players.size(); ii++)
+	{
+		players[ii]->clearScreen();
+	}
+
 	int turn = (int)firstPlayer;
 
 	while(!gameIsOver)

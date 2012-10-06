@@ -2,7 +2,6 @@
 
 #include "Card.h"
 #include <deque>
-#include <exception>
 
 class Player;
 

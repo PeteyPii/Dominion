@@ -144,6 +144,9 @@
     <ClCompile Include="src\PacketID.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\DominionApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RandomNumber.h">
@@ -273,6 +276,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\PacketID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DominionApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

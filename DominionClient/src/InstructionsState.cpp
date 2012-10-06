@@ -2,6 +2,7 @@
 
 #include "CommonFunctions.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -19,4 +20,7 @@ void InstructionsState::runState()
 
 	cout << "|--- Instructions ---|" << endl;
 	cout << "To be completed..." << endl;
+
+	string buffer;
+	getline(cin, buffer);	// Press ENTER to continue
 }

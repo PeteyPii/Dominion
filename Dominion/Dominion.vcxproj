@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\PacketID.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Card.cpp" />
     <ClCompile Include="src\CardDefinition.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="include\OrderedDeck.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\RandomNumber.h" />
+    <ClInclude Include="include\PacketID.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D77C4125-A73B-4193-ABD6-590ED345DE46}</ProjectGuid>

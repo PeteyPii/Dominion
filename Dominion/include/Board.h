@@ -2,9 +2,6 @@
 
 #include "Card.h"
 #include "OrderedDeck.h"
-#include <algorithm>
-#include <sstream>
-#include <string>
 #include <vector>
 
 class Player;

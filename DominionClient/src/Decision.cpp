@@ -54,7 +54,7 @@ unsigned int Decision::makeDecision(bool allowSkip)
 
 		if(!(converter >> selection) || selection < 0 || selection >= (int)choices.size())	// Invalid input
 		{
-			cout << "Please enter a valid number (press enter to continue)." << endl;
+			cout << "Please enter a valid number (press ENTER to continue)." << endl;
 
 			getline(cin, input);	// Press enter to continue
 		}

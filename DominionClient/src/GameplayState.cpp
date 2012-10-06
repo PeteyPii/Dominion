@@ -2,6 +2,8 @@
 
 #include "CommonFunctions.h"
 #include "Decision.h"
+#include "PacketID.h"
+#include <exception>
 #include <iostream>
 #include <SFML/Network.hpp>
 #include <SFML/System.hpp>
@@ -30,7 +32,7 @@ void GameplayState::runState()
 
 	while(wantsToConnect)
 	{
-		bool enteringName = true, enteringPort = true;
+		bool enteringName = true, enteringIP = true, enteringPort = true;
 
 		while(enteringName)
 		{
@@ -39,7 +41,7 @@ void GameplayState::runState()
 
 			if(name.compare("") == 0)
 			{
-				cout << "Please enter a valid name (press enter to continue)." << endl;
+				cout << "\nPlease enter a valid name (press ENTER to continue)." << endl;
 
 				getline(cin, name);	// Press enter to continue
 			}
@@ -49,24 +51,35 @@ void GameplayState::runState()
 			}
 		}
 
-		cout << "Please enter the IP address of the server you wish to connect to:" << endl;
-		getline(cin, ipAddressString);
+		while(enteringIP)
+		{
+			cout << "\nPlease enter the IP address of the server you wish to connect to (press ENTER for LOCALHOST):" << endl;
+			getline(cin, ipAddressString);
 
-		ipAddress = ipAddressString;
-
+			if(ipAddressString.compare("") == 0)
+			{
+				ipAddress = sf::IpAddress::LocalHost;
+			}
+			else
+			{
+				ipAddress = ipAddressString;
+				enteringIP = false;
+			}
+		}
+		
 		while(enteringPort)
 		{
-			cout << "Please enter the port the server is being hosted on (2048 - 65535, press enter for default):" << endl;
+			cout << "\nPlease enter the port the server is being hosted on (2048 - 65535, press ENTER for default):" << endl;
 			getline(cin, port);
 
-			if(!(port.compare("") == 0))
+			if(port.compare("") != 0)
 			{
 				stringstream converter;
 				converter << port;
 
 				if(!(converter >> portNumber) || portNumber < 2048 || portNumber > 65535)	// Invalid input
 				{
-					cout << "Please enter a valid number (press enter to continue)." << endl;
+					cout << "Please enter a valid number (press ENTER to continue)." << endl;
 
 					getline(cin, port);	// Press enter to continue
 				}
@@ -83,6 +96,8 @@ void GameplayState::runState()
 		
 		if(socket.connect(ipAddress, portNumber, sf::seconds(5)) != sf::Socket::Done)
 		{
+			cout << endl;
+
 			Decision tryAgain("Connection failed, try again?");
 
 			tryAgain.addOption("Yes");
@@ -92,7 +107,7 @@ void GameplayState::runState()
 
 			if(decisionResult == 0)	// Yes
 			{
-				wantsToConnect = true;
+				CommonFunctions::ClearScreen();
 			}
 			else	// No
 			{
@@ -108,6 +123,8 @@ void GameplayState::runState()
 
 	if(connectionSuccessful)
 	{
+		CommonFunctions::ClearScreen();
+
 		sf::Packet namePacket;
 		namePacket << name;
 		socket.send(namePacket);
@@ -117,25 +134,43 @@ void GameplayState::runState()
 
 		while(conenctionStatusOK && socket.receive(receivedPacket) == sf::Socket::Done)
 		{
-			bool requiredResponse;
-			string message;
+			unsigned short packetID;
 
-			receivedPacket >> requiredResponse >> message;
+			receivedPacket >> packetID;
 
-			cout << message;
-
-			if(requiredResponse)
+			switch(packetID)
 			{
-				sf::Packet responsePacket;
-				string response;
+			case PacketID::GAME_OVER:
+				cout << "Game is finished. Returning to main menu." << endl;
+				return;
+			case PacketID::STANDARD_MESSAGE:
+				bool requiredResponse;
+				string message;
 
-				getline(cin, response);
-				responsePacket << response;
+				receivedPacket >> requiredResponse >> message;
 
-				if(socket.send(responsePacket) != sf::Socket::Done)
+				cout << message;
+
+				if(requiredResponse)
 				{
-					conenctionStatusOK = false;
+					sf::Packet responsePacket;
+					string response;
+
+					getline(cin, response);
+					responsePacket << response;
+
+					if(socket.send(responsePacket) != sf::Socket::Done)
+					{
+						conenctionStatusOK = false;
+					}
 				}
+
+				break;
+			case PacketID::CLEAR_SCREEN:
+				CommonFunctions::ClearScreen();
+				break;
+			default:
+				throw exception
 			}
 		}
 

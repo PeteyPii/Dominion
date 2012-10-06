@@ -1,10 +1,9 @@
 #pragma once
 
 #include "OrderedDeck.h"
-#include <iostream>
+
 #include <SFML/Network.hpp>
 #include <string>
-#include <sstream>
 #include <vector>
 
 class Player
@@ -28,6 +27,8 @@ public:
 	void displayMessage(std::string &messageOutput, bool responseRequired);
 	void broadcastToOtherPlayers(std::string &messageOutput);
 	std::string getInput();
+	void clearScreen();
+	void sendGameOverMessage();
 	void outputStats();
 	void outputHand();
 	void outputPlayerStatus();

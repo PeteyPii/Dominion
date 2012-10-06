@@ -4,6 +4,9 @@
 #include "Decision.h"
 #include "Player.h"
 #include "RandomNumber.h"
+#include <algorithm>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -201,6 +204,11 @@ void Board::endGame()
 	stringstream globalOutput;
 	globalOutput << players[winningPlayer]->name << "  won the game with " << highestScore << " point" << pluralPoints <<  "." << endl;
 	players[winningPlayer]->broadcastToOtherPlayers(globalOutput.str());
+
+	for(unsigned int ii = 0; ii < players.size(); ii++)
+	{
+		players[ii]->sendGameOverMessage();
+	}
 }
 OrderedDeck& Board::getPurchasableCards()
 {

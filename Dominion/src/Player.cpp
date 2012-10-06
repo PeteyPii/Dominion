@@ -3,6 +3,9 @@
 #include "Board.h"
 #include "Card.h"
 #include "Decision.h"
+#include "PacketID.h"
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -22,7 +25,7 @@ void Player::displayMessage(string &messageOutput, bool responseRequired)
 	cout << name << " <- " << messageOutput;
 
 	sf::Packet sendPacket;
-	sendPacket << responseRequired << messageOutput;
+	sendPacket << PacketID::STANDARD_MESSAGE << responseRequired << messageOutput;
 	socket.send(sendPacket);
 }
 void Player::broadcastToOtherPlayers(string &messageOutput)
@@ -39,8 +42,20 @@ string Player::getInput()
 
 	string receivedText;
 	receivedPacket >> receivedText;
-	cout << name << " -> " << receivedText;
+	cout << name << " -> " << receivedText << endl;
 	return receivedText;
+}
+void Player::clearScreen()
+{
+	sf::Packet sendPacket;
+	sendPacket << PacketID::CLEAR_SCREEN;
+	socket.send(sendPacket);
+}
+void Player::sendGameOverMessage()
+{
+	sf::Packet sendPacket;
+	sendPacket << PacketID::GAME_OVER;
+	socket.send(sendPacket);
 }
 void Player::outputStats()
 {
@@ -68,7 +83,7 @@ void Player::outputStats()
 }
 void Player::outputHand()
 {
-	Decision getDescriptionDecision("To see a description of any of your cards, submit the corresponding number. To continue on, press enter. The cards in your hand are:", this);
+	Decision getDescriptionDecision("To see a description of any of your cards, submit the corresponding number. To continue on, press ENTER. The cards in your hand are:", this);
 	for(unsigned int ii = 0; ii < hand.cards.size(); ii++)
 	{
 		getDescriptionDecision.addOption(hand.cards[ii].name());
@@ -133,7 +148,7 @@ void Player::playActions()
 		{
 			outputPlayerStatus();
 
-			Decision cardToPlayDecision("Select an ACTION card by typing the corresponding number and then press enter. The cards you can play are:", this);
+			Decision cardToPlayDecision("Select an ACTION card to play:", this);
 
 			for(unsigned int ii = 0; ii < actionCards.size(); ii++)
 			{

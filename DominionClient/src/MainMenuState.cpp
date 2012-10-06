@@ -17,17 +17,17 @@ MainMenuState::~MainMenuState(void)
 }
 void MainMenuState::runState()
 {
-	CommonFunctions::ClearScreen();
-
-	cout << "______________________" << endl;
-	cout << "|                    |" << endl;
-	cout << "|   DOMINION         |" << endl;
-	cout << "|      by PeteyPii   |" << endl;
-	cout << "|____________________|" << endl;
-	cout << "\n\n" << endl;
-
 	while(true)
 	{
+		CommonFunctions::ClearScreen();
+
+		cout << "______________________" << endl;
+		cout << "|                    |" << endl;
+		cout << "|   DOMINION         |" << endl;
+		cout << "|      by PeteyPii   |" << endl;
+		cout << "|____________________|" << endl;
+		cout << "\n\n" << endl;
+
 		Decision mainMenu("Choose what you want to do:");
 
 		mainMenu.addOption("Play game");

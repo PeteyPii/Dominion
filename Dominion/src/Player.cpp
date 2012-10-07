@@ -139,7 +139,7 @@ void Player::playActions()
 		if(actionCards.size() == 0)		// Has no action cards
 		{
 			stringstream output;
-			output << "You have no ACTION cards, proceeding to the next phase." << endl;
+			output << "You have no ACTION cards, proceeding to the next phase." << endl << endl;
 			displayMessage(output.str(), false);
 
 			wantsToDoSomething = false;
@@ -155,8 +155,8 @@ void Player::playActions()
 				cardToPlayDecision.addOption(actionCards[ii]->name());
 			}
 
-			cardToPlayDecision.addOption("Do not play any action cards.");
-			cardToPlayDecision.addOption("See player status.");
+			cardToPlayDecision.addOption("Do not play any ACTION cards");
+			cardToPlayDecision.addOption("See player status");
 
 			bool actionDecisionOngoing = true;
 
@@ -167,7 +167,7 @@ void Player::playActions()
 				if(decisionResult == cardToPlayDecision.choices.size() - 2)	// No action
 				{
 					stringstream secondaryOutput;
-					secondaryOutput << "You chose not to play a card, proceeding to the next phase." << endl;
+					secondaryOutput << "You chose not to play a card, proceeding to the next phase." << endl << endl;
 					displayMessage(secondaryOutput.str(), false);
 
 					actionDecisionOngoing = false;
@@ -205,7 +205,7 @@ void Player::playActions()
 	if(actions < 1)	// No more actions left
 	{
 		stringstream output;
-		output << "You have no more actions, proceeding to the next phase." << endl;
+		output << "You have no more ACTIONS, proceeding to the next phase." << endl << endl;
 		displayMessage(output.str(), false);
 	}
 }
@@ -217,54 +217,80 @@ void Player::useBuys()
 	{
 		outputPlayerStatus();
 
-		Decision treasureCardToPlay("Select a TREASURE card to play by submitting the corresponding number:", this);
-		
 		vector<Card*> treaureCardsInHand = hand.getListOfCardsMatchingType(Card::TREASURE_TYPE);
 
-		for(unsigned int ii = 0; ii < treaureCardsInHand.size(); ii++)
+		if(treaureCardsInHand.size() > 0)
 		{
-			treasureCardToPlay.addOption(treaureCardsInHand[ii]->name());
-		}
+			treaureCardsInHand = hand.getListOfCardsMatchingType(Card::TREASURE_TYPE);
 
-		treasureCardToPlay.addOption("Play all remaining TREASURE cards in hand.");
-		treasureCardToPlay.addOption("Do not play any more TREASURE cards.");
+			Decision treasureCardToPlay("Select a TREASURE card to play (press ENTER to play all):", this);
 
-		int cardToPlay = treasureCardToPlay.makeDecision(false);
+			for(unsigned int ii = 0; ii < treaureCardsInHand.size(); ii++)
+			{
+				treasureCardToPlay.addOption(treaureCardsInHand[ii]->name());
+			}
 
-		if(cardToPlay == treasureCardToPlay.choices.size() - 2) // Play all remaining TREASURE cards
-		{
-			for(unsigned int ii = treaureCardsInHand.size() - 1; ii < treaureCardsInHand.size(); ii--)
+			treasureCardToPlay.addOption("Play all remaining TREASURE cards");
+			treasureCardToPlay.addOption("Do not play any more TREASURE cards");
+
+			int cardToPlay = treasureCardToPlay.makeDecision(true);
+
+			if(cardToPlay == treasureCardToPlay.choices.size() - 2 || cardToPlay == -1) // Play all remaining TREASURE cards
+			{
+				for(unsigned int ii = treaureCardsInHand.size() - 1; ii < treaureCardsInHand.size(); ii--)
+				{
+					stringstream playerOutput;
+					playerOutput << "You played the card " << treaureCardsInHand[ii]->name() << "." << endl;
+					displayMessage(playerOutput.str(), false);
+
+					stringstream globalOutput;
+					globalOutput << name << " played the card " << treaureCardsInHand[ii]->name() << "." << endl;
+					broadcastToOtherPlayers(globalOutput.str());
+
+					treaureCardsInHand[ii]->moveToAnotherDeck(cleanupPile);
+					cleanupPile.cards[cleanupPile.cards.size() - 1].playTreasure(this, otherPlayers);
+				}
+
+				stringstream playerOutput;
+				playerOutput << "You have no more TREASURE cards, proceeding to next phase." << endl << endl;
+				displayMessage(playerOutput.str(), false);
+
+				wantsToPlayTreasures = false;
+			}
+			else if(cardToPlay == treasureCardToPlay.choices.size() - 1)	// Do not play any more cards
+			{
+				wantsToPlayTreasures = false;
+			}
+			else
 			{
 				stringstream playerOutput;
-				playerOutput << "You played the card " << treaureCardsInHand[ii]->name() << "." << endl;
+				playerOutput << "You played the card " << treaureCardsInHand[cardToPlay]->name() << "." << endl << endl;
 				displayMessage(playerOutput.str(), false);
 
 				stringstream globalOutput;
-				globalOutput << name << " played the card " << treaureCardsInHand[ii]->name() << "." << endl;
+				globalOutput << name << " played the card " << treaureCardsInHand[cardToPlay]->name() << "." << endl;
 				broadcastToOtherPlayers(globalOutput.str());
-				
-				treaureCardsInHand[ii]->moveToAnotherDeck(cleanupPile);
-				cleanupPile.cards[cleanupPile.cards.size() - 1].playTreasure(this, otherPlayers);
-			}
 
-			wantsToPlayTreasures = false;
-		}
-		else if(cardToPlay == treasureCardToPlay.choices.size() - 1)	// Do not play any more cards
-		{
-			wantsToPlayTreasures = false;
+				treaureCardsInHand[cardToPlay]->moveToAnotherDeck(cleanupPile);
+				cleanupPile.cards[cleanupPile.cards.size() - 1].playTreasure(this, otherPlayers);
+
+				if(treaureCardsInHand.size() == 1)
+				{
+					stringstream playerOutputTwo;
+					playerOutputTwo << "You have no more TREASURE cards, proceeding to next phase." << endl << endl;
+					displayMessage(playerOutputTwo.str(), false);
+
+					wantsToPlayTreasures = false;
+				}
+			}
 		}
 		else
 		{
 			stringstream playerOutput;
-			playerOutput << "You played the card " << treaureCardsInHand[cardToPlay]->name() << "." << endl;
+			playerOutput << "You have no TREASURE cards, proceeding to next phase." << endl << endl;
 			displayMessage(playerOutput.str(), false);
 
-			stringstream globalOutput;
-			globalOutput << name << " played the card " << treaureCardsInHand[cardToPlay]->name() << "." << endl;
-			broadcastToOtherPlayers(globalOutput.str());
-
-			treaureCardsInHand[cardToPlay]->moveToAnotherDeck(cleanupPile);
-			cleanupPile.cards[cleanupPile.cards.size() - 1].playTreasure(this, otherPlayers);
+			wantsToPlayTreasures = false;
 		}
 	}
 
@@ -276,7 +302,7 @@ void Player::useBuys()
 
 	while(buys > 0 && wantsToBuy)
 	{
-		outputPlayerStatus();
+		outputStats();
 
 		Decision cardToExamineDecision("Select a card to examine by submitting the corresponding number:", this);
 
@@ -317,7 +343,7 @@ void Player::useBuys()
 					pluralBuys = "";
 
 				stringstream output;
-				output << "You chose not to use your remaining BUY" << pluralBuys << ". Cleaning up." << endl;
+				output << "You chose not to use your remaining BUY" << pluralBuys << ". Cleaning up." << endl << endl;
 				displayMessage(output.str(), false);
 
 				examineCards = false;

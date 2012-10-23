@@ -1,7 +1,5 @@
 #pragma once
 
-#include <sstream>
-#include <string>
 #include <vector>
 
 class Card;
@@ -13,11 +11,7 @@ public:
 	BureaucratCard();
 	~BureaucratCard();
 
-	static int getCoinValue(Player *owner);
-	static int getVPValue(Player *owner);
+	static int getPrice(Card *card, Player *owner, std::vector<Player*> *otherPlayers);
 	static void playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers);
-	static void playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers);
-	static void playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers);
-	static void setUpCardOnBoard();
 };
 

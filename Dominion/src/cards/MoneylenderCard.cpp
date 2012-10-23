@@ -5,6 +5,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -16,15 +18,11 @@ MoneylenderCard::~MoneylenderCard()
 {
 
 }
-int MoneylenderCard::getCoinValue(Player *owner)
+int MoneylenderCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int MoneylenderCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void MoneylenderCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void MoneylenderCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	vector<Card*> copperCards = owner->hand.getListOfCardsMatchingID(Card::COPPER_CARD);
 
@@ -52,16 +50,4 @@ void MoneylenderCard::playAction(Card *card, Player *owner, std::vector<Player*>
 		globalOutput << owner->name << " had no COPPPER cards to trash. MONEYLENDER did nothing." << endl;
 		owner->broadcastToOtherPlayers(globalOutput.str());
 	}
-}
-void MoneylenderCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MoneylenderCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MoneylenderCard::setUpCardOnBoard()
-{
-
 }

@@ -30,9 +30,13 @@ std::string Card::name()
 {
 	return Cards::cardDefinitions[cardID].name;
 }
-int Card::price()
+int Card::getPrice(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
 {
-	return Cards::cardDefinitions[cardID].price;
+	return getPrice(card, owner, &otherPlayers);
+}
+int Card::getPrice(Card *card, Player *owner, std::vector<Player*> *otherPlayers)
+{
+	return Cards::cardDefinitions[cardID].getPrice(card, owner, otherPlayers);
 }
 Card::CardTypes Card::cardType()
 {
@@ -41,10 +45,6 @@ Card::CardTypes Card::cardType()
 std::string Card::description()
 {
 	return Cards::cardDefinitions[cardID].description;
-}
-int Card::getCoinValue(Player *owner)
-{
-	return Cards::cardDefinitions[cardID].getCoinValue(owner);
 }
 int Card::getVPValue(Player *owner)
 {

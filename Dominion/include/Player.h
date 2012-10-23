@@ -1,7 +1,6 @@
 #pragma once
 
 #include "OrderedDeck.h"
-
 #include <SFML/Network.hpp>
 #include <string>
 #include <vector>

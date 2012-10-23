@@ -4,6 +4,9 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
+
 
 using namespace std;
 
@@ -15,15 +18,11 @@ ThroneRoomCard::~ThroneRoomCard()
 {
 
 }
-int ThroneRoomCard::getCoinValue(Player *owner)
+int ThroneRoomCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int ThroneRoomCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void ThroneRoomCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void ThroneRoomCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	vector<Card*> actionCards = owner->hand.getListOfCardsMatchingType(Card::ACTION_TYPE);
 
@@ -100,16 +99,4 @@ void ThroneRoomCard::playAction(Card *card, Player *owner, std::vector<Player*> 
 
 		tempPile.moveContentsToAnotherDeck(owner->cleanupPile);
 	}
-}
-void ThroneRoomCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ThroneRoomCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ThroneRoomCard::setUpCardOnBoard()
-{
-
 }

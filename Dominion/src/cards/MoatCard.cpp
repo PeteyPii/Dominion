@@ -3,6 +3,8 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -14,27 +16,11 @@ MoatCard::~MoatCard()
 {
 
 }
-int MoatCard::getCoinValue(Player *owner)
+int MoatCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 2;
 }
-int MoatCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void MoatCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void MoatCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCards(2);
-}
-void MoatCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MoatCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MoatCard::setUpCardOnBoard()
-{
-
 }

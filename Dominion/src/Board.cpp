@@ -150,7 +150,9 @@ void Board::initializeGame(int numberOfDecks, int cardsPerDeck, int maxKingdomDe
 	firstPlayer = RandomNumber::random() % players.size();
 	numberOfTurns = 0;
 
-	cardCost = 0;
+	tempCardCost = 0;
+	tempPlayer = 0;
+	tempOtherPlayers = 0;
 
 	recreatePurchasableCards();
 }
@@ -267,35 +269,43 @@ OrderedDeck* Board::getSupplyDeckFromCardID(Card::CardIDs identifier)
 
 	return 0;
 }
-bool cardDoesNotCostX(Card& card)
+bool cardDoesNotCostX(Card &card)
 {
-	return card.price() != Board::boardGame->cardCost;
+	return card.getPrice(&card, Board::boardGame->tempPlayer, Board::boardGame->tempOtherPlayers) != Board::boardGame->tempCardCost;
 }
-bool cardCostsMoreThanX(Card& card)
+bool cardCostsMoreThanX(Card &card)
 {
-	return card.price() > Board::boardGame->cardCost;
+	return card.getPrice(&card, Board::boardGame->tempPlayer, Board::boardGame->tempOtherPlayers) > Board::boardGame->tempCardCost;
 }
-OrderedDeck Board::getPurchasableCardsCostingUpToX(int x)
+OrderedDeck Board::getPurchasableCardsCostingUpToX(int x, Player *buyer, vector<Player*> *otherPlayers)
 {
 	OrderedDeck returnDeck = purchasableCards;
 
-	cardCost = x;
+	tempCardCost = x;
+	tempPlayer = buyer;
+	tempOtherPlayers = otherPlayers;
 
 	returnDeck.cards.erase(remove_if(returnDeck.cards.begin(), returnDeck.cards.end(), cardCostsMoreThanX), returnDeck.cards.end());
 
-	cardCost = 0;
+	tempCardCost = 0;
+	tempPlayer = 0;
+	tempOtherPlayers = 0;
 
 	return returnDeck;
 }
-OrderedDeck Board::getPurchasableCardsCostingExactlyX(int x)
+OrderedDeck Board::getPurchasableCardsCostingExactlyX(int x, Player *buyer, vector<Player*> *otherPlayers)
 {
 	OrderedDeck returnDeck = purchasableCards;
 
-	cardCost = x;
+	tempCardCost = x;
+	tempPlayer = buyer;
+	tempOtherPlayers = otherPlayers;
 
 	returnDeck.cards.erase(remove_if(returnDeck.cards.begin(), returnDeck.cards.end(), cardDoesNotCostX), returnDeck.cards.end());
 
-	cardCost = 0;
+	tempCardCost = 0;
+	tempPlayer = 0;
+	tempOtherPlayers = 0;
 
 	return returnDeck;
 }

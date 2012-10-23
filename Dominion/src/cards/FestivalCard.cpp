@@ -3,6 +3,8 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -14,31 +16,15 @@ FestivalCard::~FestivalCard()
 {
 
 }
-int FestivalCard::getCoinValue(Player *owner)
+int FestivalCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 5;
 }
-int FestivalCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void FestivalCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void FestivalCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusActions(2);
 
 	owner->plusBuys(1);
 
 	owner->plusCoins(2);
-}
-void FestivalCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void FestivalCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void FestivalCard::setUpCardOnBoard()
-{
-
 }

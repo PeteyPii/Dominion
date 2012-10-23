@@ -68,11 +68,11 @@ public:
 	~Card();
 
 	std::string name();
-	int price();
 	CardTypes cardType();
 	std::string description();
 
-	int getCoinValue(Player *owner);
+	int getPrice(Card *card, Player *owner, std::vector<Player*> &otherPlayers);
+	int getPrice(Card *card, Player *owner, std::vector<Player*> *otherPlayers);	// Can use NULL for Player pointers for default price
 	int getVPValue(Player *owner);
 	void playAction(Player *owner, std::vector<Player*> &otherPlayers);
 	void playTreasure(Player *owner, std::vector<Player*> &otherPlayers);

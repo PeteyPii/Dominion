@@ -5,6 +5,9 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
+
 
 using namespace std;
 
@@ -16,15 +19,11 @@ ThiefCard::~ThiefCard()
 {
 
 }
-int ThiefCard::getCoinValue(Player *owner)
+int ThiefCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int ThiefCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void ThiefCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void ThiefCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	Board *board = Board::boardGame;
 
@@ -279,16 +278,4 @@ void ThiefCard::playAction(Card *card, Player *owner, std::vector<Player*> &othe
 			otherPlayers[ii]->broadcastToOtherPlayers(globalOutput.str());
 		}
 	}
-}
-void ThiefCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ThiefCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ThiefCard::setUpCardOnBoard()
-{
-
 }

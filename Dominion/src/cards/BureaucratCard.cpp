@@ -5,6 +5,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -16,15 +18,11 @@ BureaucratCard::~BureaucratCard()
 {
 
 }
-int BureaucratCard::getCoinValue(Player *owner)
+int BureaucratCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int BureaucratCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void BureaucratCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void BureaucratCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	OrderedDeck *silverDeck = Board::boardGame->getSupplyDeckFromCardID(Card::SILVER_CARD);
 
@@ -120,16 +118,4 @@ void BureaucratCard::playAction(Card *card, Player *owner, std::vector<Player*> 
 			otherPlayers[ii]->broadcastToOtherPlayers(globalOutput.str());
 		}
 	}
-}
-void BureaucratCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void BureaucratCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void BureaucratCard::setUpCardOnBoard()
-{
-
 }

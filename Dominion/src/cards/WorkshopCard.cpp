@@ -5,6 +5,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -16,19 +18,15 @@ WorkshopCard::~WorkshopCard()
 {
 
 }
-int WorkshopCard::getCoinValue(Player *owner)
+int WorkshopCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 3;
 }
-int WorkshopCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void WorkshopCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void WorkshopCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	Board* board = Board::boardGame;
 
-	OrderedDeck gainableCards = board->getPurchasableCardsCostingUpToX(4);
+	OrderedDeck gainableCards = board->getPurchasableCardsCostingUpToX(4, owner, &otherPlayers);
 
 	if(gainableCards.cards.size() == 0)	// No obtainable cards
 	{
@@ -73,16 +71,4 @@ void WorkshopCard::playAction(Card *card, Player *owner, std::vector<Player*> &o
 
 		gainableCards.cards[decisionResult].containerDeck->drawCard(owner->discardPile);
 	}
-}
-void WorkshopCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void WorkshopCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void WorkshopCard::setUpCardOnBoard()
-{
-
 }

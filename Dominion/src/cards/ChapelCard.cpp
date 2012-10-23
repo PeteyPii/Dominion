@@ -5,6 +5,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -16,15 +18,11 @@ ChapelCard::~ChapelCard()
 {
 
 }
-int ChapelCard::getCoinValue(Player *owner)
+int ChapelCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 2;
 }
-int ChapelCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void ChapelCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void ChapelCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	int trashesLeft = 4;
 	bool wantsToTrash = true;
@@ -67,16 +65,4 @@ void ChapelCard::playAction(Card *card, Player *owner, std::vector<Player*> &oth
 		}
 	}
 	
-}
-void ChapelCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ChapelCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ChapelCard::setUpCardOnBoard()
-{
-
 }

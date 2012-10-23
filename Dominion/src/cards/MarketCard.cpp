@@ -3,6 +3,10 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
+
+using namespace std;
 
 MarketCard::MarketCard()
 {
@@ -12,15 +16,11 @@ MarketCard::~MarketCard()
 {
 
 }
-int MarketCard::getCoinValue(Player *owner)
+int MarketCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 5;
 }
-int MarketCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void MarketCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void MarketCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCards(1);
 
@@ -29,16 +29,4 @@ void MarketCard::playAction(Card *card, Player *owner, std::vector<Player*> &oth
 	owner->plusBuys(1);
 
 	owner->plusCoins(1);
-}
-void MarketCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MarketCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MarketCard::setUpCardOnBoard()
-{
-
 }

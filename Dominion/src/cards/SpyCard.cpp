@@ -4,6 +4,9 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
+
 
 using namespace std;
 
@@ -15,15 +18,11 @@ SpyCard::~SpyCard()
 {
 
 }
-int SpyCard::getCoinValue(Player *owner)
+int SpyCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int SpyCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void SpyCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void SpyCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCards(1);
 
@@ -150,16 +149,4 @@ void SpyCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherP
 			otherPlayers[ii]->broadcastToOtherPlayers(globalOutput.str());
 		}
 	}
-}
-void SpyCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void SpyCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void SpyCard::setUpCardOnBoard()
-{
-
 }

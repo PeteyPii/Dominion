@@ -1,6 +1,9 @@
 #include "cards\DuchyCard.h"
 
+#include "Card.h"
 #include "Player.h"
+
+using namespace std;
 
 DuchyCard::DuchyCard()
 {
@@ -10,27 +13,11 @@ DuchyCard::~DuchyCard()
 {
 
 }
-int DuchyCard::getCoinValue(Player *owner)
+int DuchyCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 5;
 }
 int DuchyCard::getVPValue(Player *owner)
 {
 	return 3;
-}
-void DuchyCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-	
-}
-void DuchyCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void DuchyCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void DuchyCard::setUpCardOnBoard()
-{
-
 }

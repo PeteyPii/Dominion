@@ -5,6 +5,9 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
+
 
 using namespace std;
 
@@ -16,15 +19,11 @@ RemodelCard::~RemodelCard()
 {
 
 }
-int RemodelCard::getCoinValue(Player *owner)
+int RemodelCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int RemodelCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void RemodelCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void RemodelCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	Board *board = Board::boardGame;
 
@@ -50,7 +49,7 @@ void RemodelCard::playAction(Card *card, Player *owner, std::vector<Player*> &ot
 		globalOutput << owner->name << " trashed the card " << owner->hand.cards[0].name() << "." << endl;
 		owner->broadcastToOtherPlayers(globalOutput.str());
 
-		priceOfTrashedCard = owner->hand.cards[0].price();
+		priceOfTrashedCard = owner->hand.cards[0].getPrice(&owner->hand.cards[0], owner, otherPlayers);
 
 		owner->hand.cards[0].moveToAnotherDeck(board->trashPile);
 	}
@@ -73,14 +72,14 @@ void RemodelCard::playAction(Card *card, Player *owner, std::vector<Player*> &ot
 		globalOutput << owner->name << " trashed the card " << owner->hand.cards[decisionResult].name() << "." << endl;
 		owner->broadcastToOtherPlayers(globalOutput.str());
 
-		priceOfTrashedCard = owner->hand.cards[decisionResult].price();
+		priceOfTrashedCard = owner->hand.cards[decisionResult].getPrice(&owner->hand.cards[decisionResult], owner, otherPlayers);
 
 		owner->hand.cards[decisionResult].moveToAnotherDeck(board->trashPile);
 	}
 
 	if(priceOfTrashedCard != -1)	// Player trashed a card
 	{
-		OrderedDeck gainableCards = board->getPurchasableCardsCostingUpToX(priceOfTrashedCard + 2);
+		OrderedDeck gainableCards = board->getPurchasableCardsCostingUpToX(priceOfTrashedCard + 2, owner, &otherPlayers);
 
 		if(gainableCards.cards.size() == 0)	// No obtainable cards
 		{
@@ -126,16 +125,4 @@ void RemodelCard::playAction(Card *card, Player *owner, std::vector<Player*> &ot
 			gainableCards.cards[decisionResult].containerDeck->drawCard(owner->discardPile);
 		}
 	}
-}
-void RemodelCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void RemodelCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void RemodelCard::setUpCardOnBoard()
-{
-
 }

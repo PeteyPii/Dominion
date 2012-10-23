@@ -3,6 +3,9 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
+
 
 using namespace std;
 
@@ -14,28 +17,12 @@ VillageCard::~VillageCard()
 {
 
 }
-int VillageCard::getCoinValue(Player *owner)
+int VillageCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 3;
 }
-int VillageCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void VillageCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void VillageCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCards(1);
 	owner->plusActions(2);
-}
-void VillageCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void VillageCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void VillageCard::setUpCardOnBoard()
-{
-
 }

@@ -5,6 +5,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -16,15 +18,11 @@ MineCard::~MineCard()
 {
 
 }
-int MineCard::getCoinValue(Player *owner)
+int MineCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 5;
 }
-int MineCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void MineCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void MineCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	Board *board = Board::boardGame;
 
@@ -52,7 +50,7 @@ void MineCard::playAction(Card *card, Player *owner, std::vector<Player*> &other
 		globalOutput << owner->name << " trashed the card " << treasureCardsInHand[0]->name() << "." << endl;
 		owner->broadcastToOtherPlayers(globalOutput.str());
 
-		priceOfTrashedCard = treasureCardsInHand[0]->price();
+		priceOfTrashedCard = treasureCardsInHand[0]->getPrice(treasureCardsInHand[0], owner, otherPlayers);
 
 		treasureCardsInHand[0]->moveToAnotherDeck(board->trashPile);
 	}
@@ -75,7 +73,7 @@ void MineCard::playAction(Card *card, Player *owner, std::vector<Player*> &other
 		globalOutput << owner->name << " trashed the card " << treasureCardsInHand[decisionResult]->name() << "." << endl;
 		owner->broadcastToOtherPlayers(globalOutput.str());
 
-		priceOfTrashedCard = treasureCardsInHand[decisionResult]->price();
+		priceOfTrashedCard = treasureCardsInHand[decisionResult]->getPrice(treasureCardsInHand[decisionResult], owner, otherPlayers);
 
 		treasureCardsInHand[decisionResult]->moveToAnotherDeck(board->trashPile);
 	}
@@ -92,7 +90,7 @@ void MineCard::playAction(Card *card, Player *owner, std::vector<Player*> &other
 	}
 	else
 	{
-		OrderedDeck purchasableCards = board->getPurchasableCardsCostingUpToX(priceOfTrashedCard + 3);
+		OrderedDeck purchasableCards = board->getPurchasableCardsCostingUpToX(priceOfTrashedCard + 3, owner, &otherPlayers);
 
 		vector<Card*> buyableCards = purchasableCards.getListOfCardsMatchingType(Card::TREASURE_TYPE);
 
@@ -140,16 +138,4 @@ void MineCard::playAction(Card *card, Player *owner, std::vector<Player*> &other
 			buyableCards[decisionResult]->containerDeck->drawCard(owner->hand);
 		}
 	}
-}
-void MineCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MineCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MineCard::setUpCardOnBoard()
-{
-
 }

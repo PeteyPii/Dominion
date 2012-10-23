@@ -8,6 +8,7 @@
 #include "cards/CopperCard.h"
 #include "cards/CouncilRoomCard.h"
 #include "cards/CurseCard.h"
+#include "cards/DefaultCard.h"
 #include "cards/DuchyCard.h"
 #include "cards/EstateCard.h"
 #include "cards/FeastCard.h"

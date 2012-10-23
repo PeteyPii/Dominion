@@ -311,18 +311,18 @@ void Player::useBuys()
 			string hasEnoughCoinToken = "*";
 			string pluralCoins = "s";
 
-			if(purchasableCards.cards[ii].price() > coins)
+			if(purchasableCards.cards[ii].getPrice(&purchasableCards.cards[ii], this, otherPlayers) > coins)
 			{
 				hasEnoughCoinToken = "";
 			}
 
-			if(purchasableCards.cards[ii].price() == 1)
+			if(purchasableCards.cards[ii].getPrice(&purchasableCards.cards[ii], this, otherPlayers) == 1)
 			{
 				pluralCoins = "";
 			}
 
 			stringstream formatter;
-			formatter << "{" << hasEnoughCoinToken << purchasableCards.cards[ii].price() << " coin" << pluralCoins << "} " << purchasableCards.cards[ii].name();
+			formatter << "{" << hasEnoughCoinToken << purchasableCards.cards[ii].getPrice(&purchasableCards.cards[ii], this, otherPlayers) << " coin" << pluralCoins << "} " << purchasableCards.cards[ii].name();
 
 			cardToExamineDecision.addOption(formatter.str());
 		}
@@ -373,7 +373,7 @@ void Player::useBuys()
 					}
 					else if(nextDecisionResult == 1)	// Buy the card
 					{
-						if(coins >= purchasableCards.cards[decisionResult].price())	// Player has enough coins
+						if(coins >= purchasableCards.cards[decisionResult].getPrice(&purchasableCards.cards[decisionResult], this, otherPlayers))	// Player has enough coins
 						{
 							if(purchasableCards.cards[decisionResult].containerDeck->drawCard(discardPile))	// Deck is empty
 							{
@@ -383,7 +383,7 @@ void Player::useBuys()
 							}
 							else
 							{
-								coins -= purchasableCards.cards[decisionResult].price();
+								coins -= purchasableCards.cards[decisionResult].getPrice(&purchasableCards.cards[decisionResult], this, otherPlayers);
 								buys--;
 
 								lookingAtACard = false;

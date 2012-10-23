@@ -3,6 +3,8 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -14,29 +16,12 @@ LaboratoryCard::~LaboratoryCard()
 {
 
 }
-int LaboratoryCard::getCoinValue(Player *owner)
+int LaboratoryCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 5;
 }
-int LaboratoryCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void LaboratoryCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void LaboratoryCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCards(2);
-
 	owner->plusActions(1);
-}
-void LaboratoryCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void LaboratoryCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void LaboratoryCard::setUpCardOnBoard()
-{
-
 }

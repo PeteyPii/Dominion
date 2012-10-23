@@ -1,6 +1,9 @@
 #include "cards\CurseCard.h"
 
+#include "Card.h"
 #include "Player.h"
+
+using namespace std;
 
 CurseCard::CurseCard()
 {
@@ -10,27 +13,11 @@ CurseCard::~CurseCard()
 {
 
 }
-int CurseCard::getCoinValue(Player *owner)
+int CurseCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
 	return 0;
 }
 int CurseCard::getVPValue(Player *owner)
 {
 	return -1;
-}
-void CurseCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-	
-}
-void CurseCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void CurseCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void CurseCard::setUpCardOnBoard()
-{
-
 }

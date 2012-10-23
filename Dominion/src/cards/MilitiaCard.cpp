@@ -4,6 +4,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -15,15 +17,11 @@ MilitiaCard::~MilitiaCard()
 {
 
 }
-int MilitiaCard::getCoinValue(Player *owner)
+int MilitiaCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int MilitiaCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void MilitiaCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void MilitiaCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCoins(2);
 
@@ -72,16 +70,4 @@ void MilitiaCard::playAction(Card *card, Player *owner, std::vector<Player*> &ot
 			otherPlayers[ii]->broadcastToOtherPlayers(globalOutput.str());
 		}
 	}
-}
-void MilitiaCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MilitiaCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void MilitiaCard::setUpCardOnBoard()
-{
-
 }

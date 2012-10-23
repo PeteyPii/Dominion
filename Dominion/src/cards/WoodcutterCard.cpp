@@ -3,6 +3,8 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -14,28 +16,12 @@ WoodcutterCard::~WoodcutterCard()
 {
 
 }
-int WoodcutterCard::getCoinValue(Player *owner)
+int WoodcutterCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 3;
 }
-int WoodcutterCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void WoodcutterCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void WoodcutterCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusBuys(1);
 	owner->plusCoins(2);
-}
-void WoodcutterCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void WoodcutterCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void WoodcutterCard::setUpCardOnBoard()
-{
-
 }

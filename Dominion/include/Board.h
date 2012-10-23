@@ -29,7 +29,9 @@ public:
 	unsigned int firstPlayer;
 	int numberOfTurns;
 
-	int cardCost;
+	int tempCardCost;
+	Player *tempPlayer;
+	std::vector<Player*> *tempOtherPlayers;
 	
 	Board();
 	~Board();
@@ -39,9 +41,9 @@ public:
 	void endGame();
 
 	OrderedDeck& getPurchasableCards();
-	OrderedDeck* getSupplyDeckFromCardID(Card::CardIDs identifier);	// Never returns empty deck, can return 0 (AKA null)
-	OrderedDeck getPurchasableCardsCostingUpToX(int x);
-	OrderedDeck getPurchasableCardsCostingExactlyX(int x);
+	OrderedDeck* getSupplyDeckFromCardID(Card::CardIDs identifier);				// Never returns empty deck, can return NULL
+	OrderedDeck getPurchasableCardsCostingUpToX(int x, Player *buyer, std::vector<Player*> *otherPlayers);
+	OrderedDeck getPurchasableCardsCostingExactlyX(int x, Player *buyer, std::vector<Player*> *otherPlayers);
 
 	unsigned int cyclePlayerNumber(int number);
 private:

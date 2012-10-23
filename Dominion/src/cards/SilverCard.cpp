@@ -1,6 +1,10 @@
 #include "cards\SilverCard.h"
 
+#include "Card.h"
 #include "Player.h"
+#include <string>
+
+using namespace std;
 
 SilverCard::SilverCard()
 {
@@ -10,27 +14,11 @@ SilverCard::~SilverCard()
 {
 
 }
-int SilverCard::getCoinValue(Player *owner)
+int SilverCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 2;
+	return 3;
 }
-int SilverCard::getVPValue(Player *owner)
+void SilverCard::playTreasure(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
-	return 0;
-}
-void SilverCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-	
-}
-void SilverCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-	owner->coins += getCoinValue(owner);
-}
-void SilverCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void SilverCard::setUpCardOnBoard()
-{
-
+	owner->coins += 2;
 }

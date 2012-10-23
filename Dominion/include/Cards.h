@@ -6,6 +6,7 @@
 class Cards
 {
 public:
+	static CardDefinition def;
 	static CardDefinition cardDefinitions[];
 	
 	static OrderedDeck allKingdomCards();

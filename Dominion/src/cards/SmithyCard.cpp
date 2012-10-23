@@ -3,6 +3,8 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -14,27 +16,11 @@ SmithyCard::~SmithyCard()
 {
 
 }
-int SmithyCard::getCoinValue(Player *owner)
+int SmithyCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int SmithyCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void SmithyCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void SmithyCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCards(3);
-}
-void SmithyCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void SmithyCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void SmithyCard::setUpCardOnBoard()
-{
-
 }

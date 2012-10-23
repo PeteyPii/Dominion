@@ -5,6 +5,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -16,15 +18,11 @@ FeastCard::~FeastCard()
 {
 
 }
-int FeastCard::getCoinValue(Player *owner)
+int FeastCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 4;
 }
-int FeastCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void FeastCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void FeastCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	
 	Board* board = Board::boardGame;
@@ -42,7 +40,7 @@ void FeastCard::playAction(Card *card, Player *owner, std::vector<Player*> &othe
 		card->moveToAnotherDeck(board->trashPile);
 	}
 	
-	OrderedDeck gainableCards = board->getPurchasableCardsCostingUpToX(5);
+	OrderedDeck gainableCards = board->getPurchasableCardsCostingUpToX(5, owner, &otherPlayers);
 
 	if(gainableCards.cards.size() == 0)	// No obtainable cards
 	{
@@ -87,16 +85,4 @@ void FeastCard::playAction(Card *card, Player *owner, std::vector<Player*> &othe
 
 		gainableCards.cards[decisionResult].containerDeck->drawCard(owner->discardPile);
 	}
-}
-void FeastCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void FeastCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void FeastCard::setUpCardOnBoard()
-{
-
 }

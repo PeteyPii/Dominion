@@ -1,8 +1,9 @@
 #include "cards\GoldCard.h"
 
 #include "Card.h"
-#include "OrderedDeck.h"
 #include "Player.h"
+
+using namespace std;
 
 GoldCard::GoldCard()
 {
@@ -12,27 +13,11 @@ GoldCard::~GoldCard()
 {
 
 }
-int GoldCard::getCoinValue(Player *owner)
+int GoldCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 3;
+	return 6;
 }
-int GoldCard::getVPValue(Player *owner)
+void GoldCard::playTreasure(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
-	return 0;
-}
-void GoldCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-	
-}
-void GoldCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-	owner->coins += getCoinValue(owner);
-}
-void GoldCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void GoldCard::setUpCardOnBoard()
-{
-
+	owner->coins += 3;
 }

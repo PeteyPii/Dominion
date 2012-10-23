@@ -4,6 +4,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -15,15 +17,11 @@ ChancellorCard::~ChancellorCard()
 {
 
 }
-int ChancellorCard::getCoinValue(Player *owner)
+int ChancellorCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 3;
 }
-int ChancellorCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void ChancellorCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void ChancellorCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCoins(2);
 
@@ -55,16 +53,4 @@ void ChancellorCard::playAction(Card *card, Player *owner, std::vector<Player*> 
 		globalOutput << owner->name << " chose not to move his deck to his discard pile." << endl;
 		owner->broadcastToOtherPlayers(globalOutput.str());
 	}
-}
-void ChancellorCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ChancellorCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ChancellorCard::setUpCardOnBoard()
-{
-
 }

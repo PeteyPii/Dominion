@@ -4,6 +4,8 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -15,15 +17,11 @@ WitchCard::~WitchCard()
 {
 
 }
-int WitchCard::getCoinValue(Player *owner)
+int WitchCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 5;
 }
-int WitchCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void WitchCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void WitchCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	owner->plusCards(2);
 
@@ -57,16 +55,4 @@ void WitchCard::playAction(Card *card, Player *owner, std::vector<Player*> &othe
 			}
 		}
 	}
-}
-void WitchCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void WitchCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void WitchCard::setUpCardOnBoard()
-{
-
 }

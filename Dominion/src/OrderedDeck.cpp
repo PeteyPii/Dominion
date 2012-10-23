@@ -103,11 +103,11 @@ void OrderedDeck::sortByCostThenName()
 	{
 		for(unsigned int jj = 0; jj < cards.size() - 1 - ii; jj++)
 		{
-			if(cards[jj].price() > cards[jj + 1].price())
+			if(cards[jj].getPrice(&cards[jj], 0, 0) > cards[jj + 1].getPrice(&cards[jj + 1], 0, 0))
 			{
 				cards[jj].sameDeckSwap(cards[jj + 1]);
 			}
-			else if(cards[jj].price() == cards[jj + 1].price())
+			else if(cards[jj].getPrice(&cards[jj], 0, 0) == cards[jj + 1].getPrice(&cards[jj + 1], 0, 0))
 			{
 				if(cards[jj].name().compare(cards[jj + 1].name()) > 0)
 				{

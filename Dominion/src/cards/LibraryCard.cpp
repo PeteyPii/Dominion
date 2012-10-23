@@ -4,6 +4,8 @@
 #include "Decision.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -15,15 +17,11 @@ LibraryCard::~LibraryCard()
 {
 
 }
-int LibraryCard::getCoinValue(Player *owner)
+int LibraryCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 5;
 }
-int LibraryCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void LibraryCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void LibraryCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	bool playerCanDraw = true;
 
@@ -72,16 +70,4 @@ void LibraryCard::playAction(Card *card, Player *owner, std::vector<Player*> &ot
 	owner->broadcastToOtherPlayers(globalOutput.str());
 
 	setAsideActionCards.moveContentsToAnotherDeck(owner->discardPile);
-}
-void LibraryCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void LibraryCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void LibraryCard::setUpCardOnBoard()
-{
-
 }

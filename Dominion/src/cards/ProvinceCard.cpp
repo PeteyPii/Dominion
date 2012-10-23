@@ -1,5 +1,10 @@
 #include "cards\ProvinceCard.h"
 
+#include "Card.h"
+#include "Player.h"
+
+using namespace std;
+
 ProvinceCard::ProvinceCard()
 {
 	
@@ -8,27 +13,11 @@ ProvinceCard::~ProvinceCard()
 {
 
 }
-int ProvinceCard::getCoinValue(Player *owner)
+int ProvinceCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 8;
 }
 int ProvinceCard::getVPValue(Player *owner)
 {
 	return 6;
-}
-void ProvinceCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-	
-}
-void ProvinceCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ProvinceCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void ProvinceCard::setUpCardOnBoard()
-{
-
 }

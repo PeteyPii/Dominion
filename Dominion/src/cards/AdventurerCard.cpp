@@ -3,6 +3,8 @@
 #include "Card.h"
 #include "OrderedDeck.h"
 #include "Player.h"
+#include <sstream>
+#include <string>
 
 using namespace std;
 
@@ -14,15 +16,11 @@ AdventurerCard::~AdventurerCard()
 {
 
 }
-int AdventurerCard::getCoinValue(Player *owner)
+int AdventurerCard::getPrice(Card *card, Player *owner, vector<Player*> *otherPlayers)
 {
-	return 0;
+	return 6;
 }
-int AdventurerCard::getVPValue(Player *owner)
-{
-	return 0;
-}
-void AdventurerCard::playAction(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
+void AdventurerCard::playAction(Card *card, Player *owner, vector<Player*> &otherPlayers)
 {
 	OrderedDeck revealedCards;
 	int treasureCardCount = 0;
@@ -70,16 +68,4 @@ void AdventurerCard::playAction(Card *card, Player *owner, std::vector<Player*> 
 	stringstream globalOutputTwo;
 	globalOutputTwo << owner->name << " discarded the remaining revealed cards." << endl;
 	owner->broadcastToOtherPlayers(globalOutputTwo.str());
-}
-void AdventurerCard::playTreasure(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void AdventurerCard::playDuration(Card *card, Player *owner, std::vector<Player*> &otherPlayers)
-{
-
-}
-void AdventurerCard::setUpCardOnBoard()
-{
-
 }

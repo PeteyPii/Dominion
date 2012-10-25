@@ -1,8 +1,8 @@
 #include "PacketID.h"
 
-const unsigned short PacketID::GAME_OVER = 0;
-const unsigned short PacketID::STANDARD_MESSAGE = 1;
-const unsigned short PacketID::CLEAR_SCREEN = 2;
+const sf::Uint16 PacketID::GAME_OVER = 0;
+const sf::Uint16 PacketID::STANDARD_MESSAGE = 1;
+const sf::Uint16 PacketID::CLEAR_SCREEN = 2;
 
 PacketID::PacketID()
 {

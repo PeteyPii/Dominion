@@ -3,6 +3,7 @@
 DominionApp* DominionApp::dominionApp;
 
 DominionApp::DominionApp()
+	: window(sf::VideoMode(800, 600, 32), "Dominion")
 {
 	dominionApp = this;
 }

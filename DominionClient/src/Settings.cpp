@@ -47,7 +47,7 @@ void Settings::loadSettings()
 		stringstream converter;
 		converter << mapValue;
 
-		if(!(converter >> mapValue))
+		if(!(converter >> number))
 		{
 			throw exception("Bad settings value");
 		}
@@ -55,7 +55,38 @@ void Settings::loadSettings()
 		settings.insert(pair<string, int>(key, number));
 	}
 
-	map<string, int> defaultSettings;
+	settingsFile.close();
 
-	defaultSettings.insert(pair<string, int>("textOnly", 0));
+	// Default settings (they do not overwrite)
+	settings.insert(pair<string, int>("textOnly", 0));
+}
+void Settings::saveSettings()
+{
+	ofstream settingsFile;
+	settingsFile.open("settings.txt");
+
+	if(settingsFile.is_open())
+	{
+		for(map<string, int>::iterator it = settings.begin(); it != settings.end(); it++)
+		{
+			settingsFile << it->first << '=' << it->second << endl;
+		}
+
+		settingsFile.close();
+	}
+	else
+	{
+		throw exception("Could not save settings");
+	}
+}
+bool Settings::isGameTextOnly()
+{
+	if(settings.find("textOnly")->second != 0)	// "textOnly=1"
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

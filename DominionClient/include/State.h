@@ -6,5 +6,8 @@ public:
 	State();
 	~State();
 	
-	virtual void runState();
+	virtual void runTextOnly();
+
+	virtual void step();
+	virtual void draw();
 };

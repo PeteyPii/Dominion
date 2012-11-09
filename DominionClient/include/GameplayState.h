@@ -8,5 +8,5 @@ public:
 	GameplayState();
 	~GameplayState();
 
-	void runState();
+	void runTextOnly();
 };

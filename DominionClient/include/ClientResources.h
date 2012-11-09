@@ -7,8 +7,7 @@
 class ClientResources
 {
 public:
-	static ClientResources *resources;
-
+	sf::Texture backgroundCastle;
 	sf::Image cardImages[NUMBER_OF_CARDS + 1];
 	sf::Font deutschFont;
 

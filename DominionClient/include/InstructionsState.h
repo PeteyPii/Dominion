@@ -8,5 +8,5 @@ public:
 	InstructionsState();
 	~InstructionsState();
 
-	void runState();
+	void runTextOnly();
 };

@@ -6,17 +6,17 @@
 
 using namespace std;
 
-InstructionsState::InstructionsState(void)
+InstructionsState::InstructionsState()
 {
 
 }
-InstructionsState::~InstructionsState(void)
+InstructionsState::~InstructionsState()
 {
 
 }
-void InstructionsState::runState()
+void InstructionsState::runTextOnly()
 {
-	CommonFunctions::ClearScreen();
+	CommonFunctions::clearScreen();
 
 	cout << "|--- Instructions ---|" << endl;
 	cout << "To be completed..." << endl;

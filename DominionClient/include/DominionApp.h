@@ -1,21 +1,29 @@
 #pragma once
 
-#include "GameplayState.h"
-#include "InstructionsState.h"
-#include "MainMenuState.h"
+#include "ClientResources.h"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+
+class GameplayState;
+class InstructionsState;
+class MainMenuState;
+class State;
 
 class DominionApp
 {
 public:
 	static DominionApp *dominionApp;
 
-	MainMenuState mainMenuState;
-	GameplayState gameplayState;
-	InstructionsState instructionsState;
+	ClientResources resources;
 
-	sf::Window window;
+	MainMenuState *mainMenuState;
+	GameplayState *gameplayState;
+	InstructionsState *instructionsState;
+
+	State *currentState;
+
+	sf::RenderWindow *window;
 
 	DominionApp();
 	~DominionApp();

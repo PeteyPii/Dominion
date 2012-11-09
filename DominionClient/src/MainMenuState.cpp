@@ -1,25 +1,37 @@
 #include "MainMenuState.h"
 
+#include "ClientResources.h"
 #include "CommonFunctions.h"
 #include "Decision.h"
 #include "DominionApp.h"
+#include "GameplayState.h"
+#include "InstructionsState.h"
+#include "Settings.h"
 #include <iostream>
+#include <SFML/System.hpp>
 
 using namespace std;
 
-MainMenuState::MainMenuState(void)
+MainMenuState::MainMenuState()
 {
+	app = DominionApp::dominionApp;
 
+	if(!Settings::isGameTextOnly())
+	{
+		background.setTexture(app->resources.backgroundCastle);
+		background.setPosition(0, 0);
+		background.setScale(app->window->getView().getSize().x / app->resources.backgroundCastle.getSize().x, app->window->getView().getSize().y / app->resources.backgroundCastle.getSize().y);
+	}
 }
-MainMenuState::~MainMenuState(void)
+MainMenuState::~MainMenuState()
 {
-
+	
 }
-void MainMenuState::runState()
+void MainMenuState::runTextOnly()
 {
 	while(true)
 	{
-		CommonFunctions::ClearScreen();
+		CommonFunctions::clearScreen();
 
 		cout << "______________________" << endl;
 		cout << "|                    |" << endl;
@@ -38,15 +50,32 @@ void MainMenuState::runState()
 
 		if(decisionResult == 0)	// Play game
 		{
-			DominionApp::dominionApp->gameplayState.runState();
+			app->gameplayState->runTextOnly();
 		}
 		else if(decisionResult == 1)	// See instructions
 		{
-			DominionApp::dominionApp->instructionsState.runState();
+			app->instructionsState->runTextOnly();
 		}
 		else if(decisionResult == 2)	// Exit game
 		{
 			break;
 		}
 	}
+}
+void MainMenuState::step()
+{
+	sf::Event event;
+
+	while(app->window->pollEvent(event))
+	{
+
+	}
+}
+void MainMenuState::draw()
+{
+	app->window->clear(sf::Color(255,0,255,255));
+
+	app->window->draw(background);
+
+	app->window->display();
 }

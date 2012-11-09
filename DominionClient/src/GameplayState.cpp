@@ -19,9 +19,9 @@ GameplayState::~GameplayState()
 {
 
 }
-void GameplayState::runState()
+void GameplayState::runTextOnly()
 {
-	CommonFunctions::ClearScreen();
+	CommonFunctions::clearScreen();
 
 	string name, ipAddressString, port;
 	unsigned short portNumber = 4521;
@@ -108,7 +108,7 @@ void GameplayState::runState()
 
 			if(decisionResult == 0)	// Yes
 			{
-				CommonFunctions::ClearScreen();
+				CommonFunctions::clearScreen();
 			}
 			else	// No
 			{
@@ -124,7 +124,7 @@ void GameplayState::runState()
 
 	if(connectionSuccessful)
 	{
-		CommonFunctions::ClearScreen();
+		CommonFunctions::clearScreen();
 
 		sf::Packet namePacket;
 		namePacket << name;
@@ -169,7 +169,7 @@ void GameplayState::runState()
 			}
 			else if(packetID == PacketID::CLEAR_SCREEN)
 			{
-				CommonFunctions::ClearScreen();
+				CommonFunctions::clearScreen();
 			}
 		}
 

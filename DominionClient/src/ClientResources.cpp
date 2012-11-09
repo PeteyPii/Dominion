@@ -1,9 +1,8 @@
 #include "ClientResources.h"
 
-
 ClientResources::ClientResources()
 {
-	resources = this;
+
 }
 ClientResources::~ClientResources()
 {
@@ -11,5 +10,7 @@ ClientResources::~ClientResources()
 }
 void ClientResources::loadResources()
 {
-	deutschFont = sf::Font()
+	backgroundCastle.loadFromFile("resources/images/castle_background.jpg");
+
+	deutschFont.loadFromFile("resources/fonts/Deutsch.ttf");
 }

@@ -8,7 +8,15 @@ State::~State()
 {
 
 }
-void State::runState()
+void State::runTextOnly()
+{
+
+}
+void State::step()
+{
+
+}
+void State::draw()
 {
 
 }

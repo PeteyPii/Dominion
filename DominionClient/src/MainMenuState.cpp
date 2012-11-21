@@ -8,7 +8,6 @@
 #include "InstructionsState.h"
 #include "Settings.h"
 #include <iostream>
-#include <SFML/System.hpp>
 
 using namespace std;
 
@@ -16,11 +15,31 @@ MainMenuState::MainMenuState()
 {
 	app = DominionApp::dominionApp;
 
+	leftButtonDown = false;
+
 	if(!Settings::isGameTextOnly())
 	{
 		background.setTexture(app->resources.backgroundCastle);
 		background.setPosition(0, 0);
-		background.setScale(app->window->getView().getSize().x / app->resources.backgroundCastle.getSize().x, app->window->getView().getSize().y / app->resources.backgroundCastle.getSize().y);
+		background.setScale(app->window->getView().getSize().x / app->resources.backgroundCastle.getSize().x, 
+							app->window->getView().getSize().y / app->resources.backgroundCastle.getSize().y);
+
+		titleText.setFont(app->resources.deutschFont);
+		titleText.setString("DOMINION");
+		titleText.setCharacterSize(app->window->getSize().y / 9);
+		titleText.setPosition(sf::Vector2f(0.05f * app->window->getSize().x, 0.05f * app->window->getSize().y));
+
+		connectToServerText =	ClickableText("Connect to a server", 
+											sf::Vector2f(0.75f * app->window->getSize().x, 0.8f * app->window->getSize().y), 
+											app->window->getSize().y / 27, 
+											DominionApp::dominionApp->resources.deutschFont, 
+											0.0);
+
+		exitText =				ClickableText("Exit game", 
+											sf::Vector2f(0.75f * app->window->getSize().x, 0.85f * app->window->getSize().y), 
+											app->window->getSize().y / 27, 
+											DominionApp::dominionApp->resources.deutschFont, 
+											0.0);
 	}
 }
 MainMenuState::~MainMenuState()
@@ -73,9 +92,48 @@ void MainMenuState::step()
 }
 void MainMenuState::draw()
 {
-	app->window->clear(sf::Color(255,0,255,255));
-
 	app->window->draw(background);
 
+	app->window->draw(titleText);
+	app->window->draw(connectToServerText.text);
+	app->window->draw(exitText.text);
+
 	app->window->display();
+}
+void MainMenuState::eventMouseMoved(sf::Event mouseEvent)
+{
+	updateButtons(app->window->convertCoords(sf::Vector2i(mouseEvent.mouseMove.x, mouseEvent.mouseMove.y)), leftButtonDown);
+}
+void MainMenuState::eventMouseButtonPressed(sf::Event mouseEvent)
+{
+	if(mouseEvent.mouseButton.button == sf::Mouse::Left)
+		leftButtonDown = true;
+
+	updateButtons(app->window->convertCoords(sf::Vector2i(mouseEvent.mouseButton.x, mouseEvent.mouseButton.y)), leftButtonDown);
+}
+void MainMenuState::eventMouseButtonReleased(sf::Event mouseEvent)
+{
+	if(mouseEvent.mouseButton.button == sf::Mouse::Left)
+		leftButtonDown = false;
+
+	updateButtons(app->window->convertCoords(sf::Vector2i(mouseEvent.mouseButton.x, mouseEvent.mouseButton.y)), leftButtonDown);
+}
+void MainMenuState::updateButtons(sf::Vector2f mousePosition, bool isLeftButtonPressed)
+{
+	if(connectToServerText.updateAndGetClicked(mousePosition, isLeftButtonPressed))
+	{
+		connectToServer();
+	}
+	else if(exitText.updateAndGetClicked(mousePosition, isLeftButtonPressed))
+	{
+		exit();
+	}
+}
+void MainMenuState::connectToServer()
+{
+
+}
+void MainMenuState::exit()
+{
+	app->stop();
 }

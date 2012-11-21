@@ -20,3 +20,31 @@ void State::draw()
 {
 
 }
+void State::eventMouseMoved(sf::Event mouseEvent)
+{
+
+}
+void State::eventMouseButtonPressed(sf::Event mouseEvent)
+{
+
+}
+void State::eventMouseButtonReleased(sf::Event mouseEvent)
+{
+
+}
+void State::eventKeyPressed(sf::Event keyEvent)
+{
+
+}
+void State::eventKeyReleased(sf::Event keyEvent)
+{
+
+}
+void State::eventMouseWheelMoved(sf::Event mouseEvent)
+{
+
+}
+void State::eventWindowResized(sf::Event windowEvent)
+{
+
+}

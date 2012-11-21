@@ -54,7 +54,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>include;$(SFML_HOME)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SFML_HOME)\include;..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,6 +93,7 @@
     </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ClickableText.cpp" />
     <ClCompile Include="src\ClientResources.cpp" />
     <ClCompile Include="src\PacketID.cpp" />
     <ClCompile Include="src\CommonFunctions.cpp" />
@@ -106,6 +107,7 @@
     <ClCompile Include="src\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ClickableText.h" />
     <ClInclude Include="include\ClientResources.h" />
     <ClInclude Include="include\CommonFunctions.h" />
     <ClInclude Include="include\Decision.h" />

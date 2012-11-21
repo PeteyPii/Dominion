@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Window.hpp>
+
 class State
 {
 public:
@@ -10,4 +12,12 @@ public:
 
 	virtual void step();
 	virtual void draw();
+
+	virtual void eventMouseMoved(sf::Event mouseEvent);
+	virtual void eventMouseButtonPressed(sf::Event mouseEvent);
+	virtual void eventMouseButtonReleased(sf::Event mouseEvent);
+	virtual void eventKeyPressed(sf::Event keyEvent);
+	virtual void eventKeyReleased(sf::Event keyEvent);
+	virtual void eventMouseWheelMoved(sf::Event mouseEvent);
+	virtual void eventWindowResized(sf::Event windowEvent);
 };

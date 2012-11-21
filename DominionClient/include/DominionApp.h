@@ -25,8 +25,11 @@ public:
 
 	sf::RenderWindow *window;
 
+	bool keepRunning;
+
 	DominionApp();
 	~DominionApp();
 
 	void begin();
+	void stop();
 };

@@ -5,6 +5,8 @@
 #include "MainMenuState.h"
 #include "Settings.h"
 #include "State.h"
+#include <SFML/System.hpp>
+
 
 DominionApp* DominionApp::dominionApp;
 
@@ -13,6 +15,8 @@ DominionApp::DominionApp()
 	dominionApp = this;
 
 	window = 0;
+
+	keepRunning = true;
 
 	Settings::loadSettings();
 
@@ -48,13 +52,41 @@ void DominionApp::begin()
 	}
 	else
 	{
-		while(window->isOpen())
+		while(window->isOpen() && keepRunning)
 		{
 			sf::Event event;
 
 			while(window->pollEvent(event))
 			{
-				if(event.type == sf::Event::Closed)
+				if(event.type == sf::Event::MouseMoved)
+				{
+					currentState->eventMouseMoved(event);
+				}
+				else if(event.type == sf::Event::MouseButtonPressed)
+				{
+					currentState->eventMouseButtonPressed(event);
+				}
+				else if(event.type == sf::Event::MouseButtonReleased)
+				{
+					currentState->eventMouseButtonReleased(event);
+				}
+				else if(event.type == sf::Event::KeyPressed)
+				{
+					currentState->eventKeyPressed(event);
+				}
+				else if(event.type == sf::Event::KeyReleased)
+				{
+					currentState->eventKeyReleased(event);
+				}
+				else if(event.type == sf::Event::MouseWheelMoved)
+				{
+					currentState->eventMouseWheelMoved(event);
+				}
+				else if(event.type == sf::Event::Resized)
+				{
+					currentState->eventWindowResized(event);
+				}
+				else if(event.type == sf::Event::Closed)
 				{
 					window->close();
 					return;
@@ -65,4 +97,8 @@ void DominionApp::begin()
 			currentState->draw();
 		}
 	}
+}
+void DominionApp::stop()
+{
+	keepRunning = false;
 }

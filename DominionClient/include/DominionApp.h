@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+class ConnectToAServerState;
 class GameplayState;
 class InstructionsState;
 class MainMenuState;
@@ -18,6 +19,7 @@ public:
 	ClientResources resources;
 
 	MainMenuState *mainMenuState;
+	ConnectToAServerState *connectToAServerState;
 	GameplayState *gameplayState;
 	InstructionsState *instructionsState;
 

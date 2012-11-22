@@ -6,20 +6,15 @@ sf::Color ClickableText::normalColour = sf::Color::White;
 sf::Color ClickableText::hovorColour = sf::Color(160, 255, 160);
 sf::Color ClickableText::clickedColour = sf::Color(80, 160, 80);
 
-ClickableText::ClickableText()
-{
-	this->text.setString("");
-	this->text.setPosition(sf::Vector2f(0, 0));
-	this->text.setCharacterSize(12);
-	this->borderSize = 0.0;
-	updateBoundingBox();
-}
-ClickableText::ClickableText(string text, sf::Vector2f position, unsigned int fontSize, sf::Font &font, float borderSize)
+ClickableText::ClickableText(string text, sf::Vector2f position, unsigned int fontSize, sf::Font *font, float borderSize)
 {
 	this->text.setString(text);
 	this->text.setPosition(position);
 	this->text.setCharacterSize(fontSize);
-	this->text.setFont(font);
+
+	if(font != 0)
+		this->text.setFont(*font);
+
 	this->borderSize = borderSize;
 	updateBoundingBox();
 }
@@ -29,11 +24,11 @@ ClickableText::~ClickableText()
 }
 bool ClickableText::updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftDown)
 {
-	if(isMouseInside(mousePosition))
+	if(boundingBox.contains(mousePosition.x, mousePosition.y))	// Mouse is over the clicking area
 	{
 		if(wasClicked)
 		{
-			if(!isLeftDown)
+			if(!isLeftDown)	// Clicked and released inside the clicking area
 			{
 				wasHovered = true;
 				wasClicked = false;
@@ -44,7 +39,7 @@ bool ClickableText::updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftD
 		}
 		else
 		{
-			if(isLeftDown)
+			if(isLeftDown)	// Clicked in the clicking area
 			{
 				wasClicked = true;
 				text.setColor(clickedColour);
@@ -57,7 +52,7 @@ bool ClickableText::updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftD
 
 		wasHovered = true;
 	}
-	else
+	else	// Mouse is not over the clicking area
 	{
 		wasClicked = false;
 		wasHovered = false;
@@ -75,7 +70,7 @@ void ClickableText::updateBoundingBox()
 	boundingBox.width -= borderSize;
 	boundingBox.height -= borderSize;
 }
-bool ClickableText::isMouseInside(sf::Vector2f mousePosition)
+void ClickableText::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-	return boundingBox.contains(mousePosition.x, mousePosition.y);
+	target.draw(text);
 }

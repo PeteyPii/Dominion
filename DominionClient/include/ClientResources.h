@@ -8,6 +8,7 @@ class ClientResources
 {
 public:
 	sf::Texture backgroundCastle;
+	sf::Texture textBoxCorner;
 	sf::Image cardImages[NUMBER_OF_CARDS + 1];
 	sf::Font deutschFont;
 

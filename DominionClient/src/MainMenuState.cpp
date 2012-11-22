@@ -1,5 +1,6 @@
 #include "MainMenuState.h"
 
+#include "ConnectToAServerState.h"
 #include "ClientResources.h"
 #include "CommonFunctions.h"
 #include "Decision.h"
@@ -29,17 +30,15 @@ MainMenuState::MainMenuState()
 		titleText.setCharacterSize(app->window->getSize().y / 9);
 		titleText.setPosition(sf::Vector2f(0.05f * app->window->getSize().x, 0.05f * app->window->getSize().y));
 
-		connectToServerText =	ClickableText("Connect to a server", 
-											sf::Vector2f(0.75f * app->window->getSize().x, 0.8f * app->window->getSize().y), 
-											app->window->getSize().y / 27, 
-											DominionApp::dominionApp->resources.deutschFont, 
-											0.0);
+		connectToServerText = ClickableText("Connect to a server", 
+			sf::Vector2f(0.75f * app->window->getSize().x, 0.8f * app->window->getSize().y), 
+			app->window->getSize().y / 27, 
+			&DominionApp::dominionApp->resources.deutschFont);
 
-		exitText =				ClickableText("Exit game", 
-											sf::Vector2f(0.75f * app->window->getSize().x, 0.85f * app->window->getSize().y), 
-											app->window->getSize().y / 27, 
-											DominionApp::dominionApp->resources.deutschFont, 
-											0.0);
+		exitText = ClickableText("Exit game", 
+			sf::Vector2f(0.75f * app->window->getSize().x, 0.85f * app->window->getSize().y), 
+			app->window->getSize().y / 27, 
+			&DominionApp::dominionApp->resources.deutschFont);
 	}
 }
 MainMenuState::~MainMenuState()
@@ -83,20 +82,15 @@ void MainMenuState::runTextOnly()
 }
 void MainMenuState::step()
 {
-	sf::Event event;
-
-	while(app->window->pollEvent(event))
-	{
-
-	}
+	
 }
 void MainMenuState::draw()
 {
 	app->window->draw(background);
 
 	app->window->draw(titleText);
-	app->window->draw(connectToServerText.text);
-	app->window->draw(exitText.text);
+	app->window->draw(connectToServerText);
+	app->window->draw(exitText);
 
 	app->window->display();
 }
@@ -131,7 +125,8 @@ void MainMenuState::updateButtons(sf::Vector2f mousePosition, bool isLeftButtonP
 }
 void MainMenuState::connectToServer()
 {
-
+	app->currentState = app->connectToAServerState;
+	connectToServerText.resetStates();
 }
 void MainMenuState::exit()
 {

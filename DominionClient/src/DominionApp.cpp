@@ -1,5 +1,6 @@
 #include "DominionApp.h"
 
+#include "ConnectToAServerState.h"
 #include "GameplayState.h"
 #include "InstructionsState.h"
 #include "MainMenuState.h"
@@ -8,7 +9,7 @@
 #include <SFML/System.hpp>
 
 
-DominionApp* DominionApp::dominionApp;
+DominionApp *DominionApp::dominionApp;
 
 DominionApp::DominionApp()
 {
@@ -29,6 +30,7 @@ DominionApp::DominionApp()
 	}
 
 	mainMenuState = new MainMenuState();
+	connectToAServerState = new ConnectToAServerState();
 	gameplayState = new GameplayState();
 	instructionsState = new InstructionsState();
 
@@ -41,6 +43,7 @@ DominionApp::~DominionApp()
 	delete window;
 
 	delete mainMenuState;
+	delete connectToAServerState;
 	delete gameplayState;
 	delete instructionsState;
 }
@@ -77,6 +80,10 @@ void DominionApp::begin()
 				else if(event.type == sf::Event::KeyReleased)
 				{
 					currentState->eventKeyReleased(event);
+				}
+				else if(event.type == sf::Event::TextEntered)
+				{
+					currentState->eventTextEntered(event);
 				}
 				else if(event.type == sf::Event::MouseWheelMoved)
 				{

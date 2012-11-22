@@ -93,8 +93,11 @@
     </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Clickable.cpp" />
+    <ClCompile Include="src\TextBox.cpp" />
     <ClCompile Include="src\ClickableText.cpp" />
     <ClCompile Include="src\ClientResources.cpp" />
+    <ClCompile Include="src\ConnectToAServerState.cpp" />
     <ClCompile Include="src\PacketID.cpp" />
     <ClCompile Include="src\CommonFunctions.cpp" />
     <ClCompile Include="src\Decision.cpp" />
@@ -107,9 +110,11 @@
     <ClCompile Include="src\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Clickable.h" />
     <ClInclude Include="include\ClickableText.h" />
     <ClInclude Include="include\ClientResources.h" />
     <ClInclude Include="include\CommonFunctions.h" />
+    <ClInclude Include="include\ConnectToAServerState.h" />
     <ClInclude Include="include\Decision.h" />
     <ClInclude Include="include\DominionApp.h" />
     <ClInclude Include="include\GameplayState.h" />
@@ -118,6 +123,7 @@
     <ClInclude Include="include\MainMenuState.h" />
     <ClInclude Include="include\InstructionsState.h" />
     <ClInclude Include="include\PacketID.h" />
+    <ClInclude Include="include\TextBox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

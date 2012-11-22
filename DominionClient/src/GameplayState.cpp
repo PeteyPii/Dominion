@@ -13,7 +13,11 @@ using namespace std;
 
 GameplayState::GameplayState()
 {
-
+	name = "";
+	ipAddressString = "";
+	port = "";
+	
+	portNumber = 4521;
 }
 GameplayState::~GameplayState()
 {
@@ -22,10 +26,7 @@ GameplayState::~GameplayState()
 void GameplayState::runTextOnly()
 {
 	CommonFunctions::clearScreen();
-
-	string name, ipAddressString, port;
-	unsigned short portNumber = 4521;
-	sf::IpAddress ipAddress;
+	
 	bool wantsToConnect = true, connectionSuccessful = false;
 
 	sf::TcpSocket socket;
@@ -181,4 +182,10 @@ void GameplayState::runTextOnly()
 	}
 
 	socket.disconnect();
+}
+void GameplayState::setConnectionDetails(string playerName, string ipAddressString, string port)
+{
+	this->name = playerName;
+	this->ipAddressString = ipAddressString;
+	this->port = port;
 }

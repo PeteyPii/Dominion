@@ -40,6 +40,10 @@ void State::eventKeyReleased(sf::Event keyEvent)
 {
 
 }
+void State::eventTextEntered(sf::Event textEvent)
+{
+
+}
 void State::eventMouseWheelMoved(sf::Event mouseEvent)
 {
 

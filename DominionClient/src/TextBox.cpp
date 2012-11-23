@@ -1,20 +1,25 @@
 #include "TextBox.h"
 
+#include "CommonFunctions.h"
 #include "DominionApp.h"
 
 sf::Color TextBox::backgroundColour = sf::Color(24, 24, 24, 100);
 sf::Color TextBox::outlineColour = sf::Color::White;
 float TextBox::normalOutlineThickness = 2.0f;
-float TextBox::highlightedOutlineThickness = 4.0f;
+float TextBox::highlightedOutlineThickness = 3.0f;
 sf::Texture *TextBox::cornerTexture = 0;
-sf::Vector2f TextBox::cornerOriginOffset = sf::Vector2f(8.0f, 8.0f);
+sf::Vector2f TextBox::cornerOriginOffset = sf::Vector2f(5.0f, 5.0f);
 
-TextBox::TextBox(sf::Vector2f position, sf::Vector2f size, std::string text, sf::Font *font, unsigned int fontSize)
+using namespace std;
+
+TextBox::TextBox(string text, sf::Vector2f position, sf::Vector2f size, sf::Font *font, unsigned int fontSize)
 {
 	if(cornerTexture == 0)
 	{
 		cornerTexture = &DominionApp::dominionApp->resources.textBoxCorner;
 	}
+
+	isBoxSelected = false;
 
 	background.setFillColor(backgroundColour);
 	background.setOutlineColor(outlineColour);
@@ -49,39 +54,44 @@ TextBox::~TextBox()
 {
 
 }
-bool TextBox::updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftDown)
+bool TextBox::isSelected() const
 {
-	if(background.getGlobalBounds().contains(mousePosition.x, mousePosition.y))	// Mouse is over the clicking area
+	return isBoxSelected;
+}
+void TextBox::select(bool val)
+{
+	if(val != isBoxSelected)
 	{
-		if(wasClicked)
-		{
-			if(!isLeftDown)	// Clicked and released inside the clicking area
-			{
-				wasHovered = true;
-				wasClicked = false;
+		isBoxSelected = !isBoxSelected;
 
-				return true;
-			}
+		if(val)
+		{
+			background.setOutlineThickness(highlightedOutlineThickness);
 		}
 		else
 		{
-			if(isLeftDown)	// Clicked in the clicking area
-			{
-				wasClicked = true;
-			}
+			background.setOutlineThickness(normalOutlineThickness);
 		}
-
-		background.setOutlineThickness(highlightedOutlineThickness);
-		wasHovered = true;
 	}
-	else	// Mouse is not over the clicking area
+}
+void TextBox::unhovered()
+{
+	if(!isSelected())
 	{
-		wasClicked = false;
-		wasHovered = false;
 		background.setOutlineThickness(normalOutlineThickness);
 	}
-
-	return false;
+}
+void TextBox::hovered()
+{
+	background.setOutlineThickness(highlightedOutlineThickness);
+}
+void TextBox::clicked()
+{
+	select(true);
+}
+void TextBox::clickedOutside()
+{
+	select(false);
 }
 void TextBox::updateDimensions()
 {
@@ -91,7 +101,9 @@ void TextBox::updateDimensions()
 	bottomLeftCorner.setPosition(background.getPosition().x, background.getPosition().y + background.getSize().y);
 	bottomRightCorner.setPosition(background.getPosition() + background.getSize());
 
-	text.setPosition(background.getPosition().x + 0.015f * background.getSize().x, background.getPosition().y + 0.45f * background.getSize().y - 0.55f * text.getGlobalBounds().height);
+	text.setPosition(background.getPosition().x + 0.015f * background.getSize().x, background.getPosition().y + 0.5f * background.getSize().y - 0.5f * text.getGlobalBounds().height - 6);
+
+	rect = background.getGlobalBounds();
 }
 void TextBox::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {

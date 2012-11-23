@@ -112,6 +112,13 @@ void MainMenuState::eventMouseButtonReleased(sf::Event mouseEvent)
 
 	updateButtons(app->window->convertCoords(sf::Vector2i(mouseEvent.mouseButton.x, mouseEvent.mouseButton.y)), leftButtonDown);
 }
+void MainMenuState::eventKeyPressed(sf::Event keyEvent)
+{
+	if(keyEvent.key.code == sf::Keyboard::Escape)
+	{
+		exit();
+	}
+}
 void MainMenuState::updateButtons(sf::Vector2f mousePosition, bool isLeftButtonPressed)
 {
 	if(connectToServerText.updateAndGetClicked(mousePosition, isLeftButtonPressed))

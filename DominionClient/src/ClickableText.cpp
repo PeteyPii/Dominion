@@ -3,7 +3,7 @@
 using namespace std;
 
 sf::Color ClickableText::normalColour = sf::Color::White;
-sf::Color ClickableText::hovorColour = sf::Color(160, 255, 160);
+sf::Color ClickableText::hoverColour = sf::Color(160, 255, 160);
 sf::Color ClickableText::clickedColour = sf::Color(80, 160, 80);
 
 ClickableText::ClickableText(string text, sf::Vector2f position, unsigned int fontSize, sf::Font *font, float borderSize)
@@ -22,7 +22,7 @@ ClickableText::~ClickableText()
 {
 
 }
-bool ClickableText::updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftDown)
+/*bool ClickableText::updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftDown)
 {
 	if(boundingBox.contains(mousePosition.x, mousePosition.y))	// Mouse is over the clicking area
 	{
@@ -60,15 +60,27 @@ bool ClickableText::updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftD
 	}
 
 	return false;
+}*/
+void ClickableText::unhovered()
+{
+	text.setColor(normalColour);
+}
+void ClickableText::hovered()
+{
+	text.setColor(hoverColour);
+}
+void ClickableText::clicked()
+{
+	text.setColor(clickedColour);
 }
 void ClickableText::updateBoundingBox()
 {
-	boundingBox = text.getGlobalBounds();
+	rect = text.getGlobalBounds();
 
-	boundingBox.left += borderSize;
-	boundingBox.top += borderSize;
-	boundingBox.width -= borderSize;
-	boundingBox.height -= borderSize;
+	rect.left += borderSize;
+	rect.top += borderSize;
+	rect.width -= borderSize;
+	rect.height -= borderSize;
 }
 void ClickableText::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {

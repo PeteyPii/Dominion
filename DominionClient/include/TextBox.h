@@ -18,11 +18,22 @@ public:
 	sf::RectangleShape background;
 	sf::Text text;
 	sf::Sprite topLeftCorner, topRightCorner, bottomLeftCorner, bottomRightCorner;
+	
+	
 
-	TextBox(sf::Vector2f position = sf::Vector2f(0.0f, 0.0f), sf::Vector2f size = sf::Vector2f(0.0f, 0.0f), std::string text = "", sf::Font *font = 0, unsigned int fontSize = 12);
+	TextBox(std::string text = "", sf::Vector2f position = sf::Vector2f(0.0f, 0.0f), sf::Vector2f size = sf::Vector2f(0.0f, 0.0f), sf::Font *font = 0, unsigned int fontSize = 12);
 	~TextBox();
 
-	bool updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftDown);
+	bool isSelected() const;
+	void select(bool val);
+	virtual void unhovered();
+	virtual void hovered();
+	virtual void clicked();
+	virtual void clickedOutside();
 	void updateDimensions();
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+
+protected:
+	bool isBoxSelected;
+	
 };

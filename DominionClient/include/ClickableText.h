@@ -9,7 +9,7 @@ class ClickableText : public sf::Drawable, public Clickable
 {
 public:
 	static sf::Color normalColour;
-	static sf::Color hovorColour;
+	static sf::Color hoverColour;
 	static sf::Color clickedColour;
 
 	sf::Text text;
@@ -18,10 +18,10 @@ public:
 	ClickableText(std::string text = "", sf::Vector2f position = sf::Vector2f(0.0f, 0.0f), unsigned int fontSize = 12, sf::Font *font = 0, float borderSize = 0.0);
 	~ClickableText();
 
-	bool updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftDown);
+	//virtual bool updateAndGetClicked(sf::Vector2f mousePosition, bool isLeftDown);
+	virtual void unhovered();
+	virtual void hovered();
+	virtual void clicked();
 	void updateBoundingBox();
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-
-private:
-	sf::FloatRect boundingBox;
 };

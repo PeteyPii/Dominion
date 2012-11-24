@@ -4,6 +4,7 @@
 #include "DominionApp.h"
 #include "GameplayState.h"
 #include "MainMenuState.h"
+#include "Settings.h"
 #include <iostream>
 
 using namespace std;
@@ -12,65 +13,68 @@ ConnectToAServerState::ConnectToAServerState()
 {
 	app = DominionApp::dominionApp;
 
-	leftButtonDown = false;
-	playerNameBoxClicked = false;
-	ipAddressBoxClicked = false;
-	portNumberBoxClicked = false;
+	if(!Settings::isGameTextOnly())
+	{
+		leftButtonDown = false;
+		playerNameBoxClicked = false;
+		ipAddressBoxClicked = false;
+		portNumberBoxClicked = false;
 
-	background.setTexture(app->resources.backgroundCastle);
-	background.setPosition(0, 0);
-	background.setScale(app->window->getView().getSize().x / app->resources.backgroundCastle.getSize().x, 
-						app->window->getView().getSize().y / app->resources.backgroundCastle.getSize().y);
+		background.setTexture(app->resources.backgroundCastle);
+		background.setPosition(0, 0);
+		background.setScale(app->window->getView().getSize().x / app->resources.backgroundCastle.getSize().x, 
+			app->window->getView().getSize().y / app->resources.backgroundCastle.getSize().y);
 
-	titleText.setFont(app->resources.deutschFont);
-	titleText.setString("Connect To A Server");
-	titleText.setCharacterSize(app->window->getSize().y / 11);
-	titleText.setPosition(sf::Vector2f(0.3f * app->window->getSize().x, 0.05f * app->window->getSize().y));
+		titleText.setFont(app->resources.deutschFont);
+		titleText.setString("Connect To A Server");
+		titleText.setCharacterSize(app->window->getSize().y / 11);
+		titleText.setPosition(sf::Vector2f(0.3f * app->window->getSize().x, 0.05f * app->window->getSize().y));
 
-	connectText = ClickableText("Connect", 
-		sf::Vector2f(0.3f * app->window->getSize().x, 0.87f * app->window->getSize().y), 
-		app->window->getSize().y / 27, 
-		&DominionApp::dominionApp->resources.deutschFont);
+		connectText = ClickableText("Connect", 
+			sf::Vector2f(0.3f * app->window->getSize().x, 0.87f * app->window->getSize().y), 
+			app->window->getSize().y / 27, 
+			&DominionApp::dominionApp->resources.deutschFont);
 
-	backText = ClickableText("Back", 
-		sf::Vector2f(0.6f * app->window->getSize().x, 0.87f * app->window->getSize().y), 
-		app->window->getSize().y / 27, 
-		&DominionApp::dominionApp->resources.deutschFont);
-		
-	playerNameText.setFont(app->resources.deutschFont);
-	playerNameText.setString("Player name:");
-	playerNameText.setCharacterSize(app->window->getSize().y / 22);
-	playerNameText.setPosition(sf::Vector2f(0.1f * app->window->getSize().x, 0.3f * app->window->getSize().y));
-	
-	ipAddressText.setFont(app->resources.deutschFont);
-	ipAddressText.setString("IP address:");
-	ipAddressText.setCharacterSize(app->window->getSize().y / 22);
-	ipAddressText.setPosition(sf::Vector2f(0.1f * app->window->getSize().x, 0.5f * app->window->getSize().y));
-	
-	portNumberText.setFont(app->resources.deutschFont);
-	portNumberText.setString("Port number:");
-	portNumberText.setCharacterSize(app->window->getSize().y / 22);
-	portNumberText.setPosition(sf::Vector2f(0.1f * app->window->getSize().x, 0.7f * app->window->getSize().y));
+		backText = ClickableText("Back", 
+			sf::Vector2f(0.6f * app->window->getSize().x, 0.87f * app->window->getSize().y), 
+			app->window->getSize().y / 27, 
+			&DominionApp::dominionApp->resources.deutschFont);
 
-	playerNameTextBox = TextBox("Enter name here:",
-		sf::Vector2f(0.25f * app->window->getSize().x, 0.3f * app->window->getSize().y),
-		sf::Vector2f(0.6f * app->window->getSize().x, 0.06f * app->window->getSize().y),
-		&app->resources.deutschFont,
-		app->window->getSize().y / 22);
+		playerNameText.setFont(app->resources.deutschFont);
+		playerNameText.setString("Player name:");
+		playerNameText.setCharacterSize(app->window->getSize().y / 22);
+		playerNameText.setPosition(sf::Vector2f(0.1f * app->window->getSize().x, 0.3f * app->window->getSize().y));
 
-	playerNameTextBox.select(true);
-	
-	ipAddressTextBox = TextBox("Enter IP address here:",
-		sf::Vector2f(0.25f * app->window->getSize().x, 0.5f * app->window->getSize().y),
-		sf::Vector2f(0.6f * app->window->getSize().x, 0.06f * app->window->getSize().y),
-		&app->resources.deutschFont,
-		app->window->getSize().y / 22);
-	
-	portNumberTextBox = TextBox("Enter name here:",
-		sf::Vector2f(0.25f * app->window->getSize().x, 0.7f * app->window->getSize().y),
-		sf::Vector2f(0.6f * app->window->getSize().x, 0.06f * app->window->getSize().y),
-		&app->resources.deutschFont,
-		app->window->getSize().y / 22);
+		ipAddressText.setFont(app->resources.deutschFont);
+		ipAddressText.setString("IP address:");
+		ipAddressText.setCharacterSize(app->window->getSize().y / 22);
+		ipAddressText.setPosition(sf::Vector2f(0.1f * app->window->getSize().x, 0.5f * app->window->getSize().y));
+
+		portNumberText.setFont(app->resources.deutschFont);
+		portNumberText.setString("Port number:");
+		portNumberText.setCharacterSize(app->window->getSize().y / 22);
+		portNumberText.setPosition(sf::Vector2f(0.1f * app->window->getSize().x, 0.7f * app->window->getSize().y));
+
+		playerNameTextBox = TextBox("Enter name here:",
+			sf::Vector2f(0.25f * app->window->getSize().x, 0.3f * app->window->getSize().y),
+			sf::Vector2f(0.6f * app->window->getSize().x, 0.06f * app->window->getSize().y),
+			&app->resources.deutschFont,
+			app->window->getSize().y / 22);
+
+		playerNameTextBox.select(true);
+
+		ipAddressTextBox = TextBox("Enter IP address here:",
+			sf::Vector2f(0.25f * app->window->getSize().x, 0.5f * app->window->getSize().y),
+			sf::Vector2f(0.6f * app->window->getSize().x, 0.06f * app->window->getSize().y),
+			&app->resources.deutschFont,
+			app->window->getSize().y / 22);
+
+		portNumberTextBox = TextBox("4521",
+			sf::Vector2f(0.25f * app->window->getSize().x, 0.7f * app->window->getSize().y),
+			sf::Vector2f(0.6f * app->window->getSize().x, 0.06f * app->window->getSize().y),
+			&app->resources.deutschFont,
+			app->window->getSize().y / 22);
+	}
 }
 ConnectToAServerState::~ConnectToAServerState()
 {

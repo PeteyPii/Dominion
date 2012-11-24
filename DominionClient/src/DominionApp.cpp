@@ -24,8 +24,8 @@ DominionApp::DominionApp()
 	if(!Settings::isGameTextOnly())
 	{
 		//window = new sf::RenderWindow(sf::VideoMode(960, 540, 32), "Dominion");
-		window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Dominion");
-		//window = new sf::RenderWindow(sf::VideoMode(1280, 720, 32), "Dominion");
+		//window = new sf::RenderWindow(sf::VideoMode(1600, 900, 32), "Dominion");
+		window = new sf::RenderWindow(sf::VideoMode(1280, 720, 32), "Dominion");
 		window->setFramerateLimit(60);
 
 		resources.loadResources();

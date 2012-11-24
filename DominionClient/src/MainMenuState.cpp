@@ -31,6 +31,11 @@ MainMenuState::MainMenuState()
 		titleText.setPosition(sf::Vector2f(0.05f * app->window->getSize().x, 0.05f * app->window->getSize().y));
 
 		connectToServerText = ClickableText("Connect to a server", 
+			sf::Vector2f(0.75f * app->window->getSize().x, 0.75f * app->window->getSize().y), 
+			app->window->getSize().y / 27, 
+			&DominionApp::dominionApp->resources.deutschFont);
+
+		seeInstructionsText = ClickableText("See instructions", 
 			sf::Vector2f(0.75f * app->window->getSize().x, 0.8f * app->window->getSize().y), 
 			app->window->getSize().y / 27, 
 			&DominionApp::dominionApp->resources.deutschFont);
@@ -90,6 +95,7 @@ void MainMenuState::draw()
 
 	app->window->draw(titleText);
 	app->window->draw(connectToServerText);
+	app->window->draw(seeInstructionsText);
 	app->window->draw(exitText);
 
 	app->window->display();
@@ -125,6 +131,10 @@ void MainMenuState::updateButtons(sf::Vector2f mousePosition, bool isLeftButtonP
 	{
 		connectToServer();
 	}
+	else if(seeInstructionsText.updateAndGetClicked(mousePosition, isLeftButtonPressed))
+	{
+		seeInstructions();
+	}
 	else if(exitText.updateAndGetClicked(mousePosition, isLeftButtonPressed))
 	{
 		exit();
@@ -132,8 +142,13 @@ void MainMenuState::updateButtons(sf::Vector2f mousePosition, bool isLeftButtonP
 }
 void MainMenuState::connectToServer()
 {
-	app->currentState = app->connectToAServerState;
 	connectToServerText.resetStates();
+	app->currentState = app->connectToAServerState;
+}
+void MainMenuState::seeInstructions()
+{
+	seeInstructionsText.resetStates();
+	app->currentState = app->instructionsState;
 }
 void MainMenuState::exit()
 {

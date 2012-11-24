@@ -16,6 +16,7 @@ public:
 	sf::Sprite background;
 	sf::Text titleText;
 	ClickableText connectToServerText;
+	ClickableText seeInstructionsText;
 	ClickableText exitText;
 
 	bool leftButtonDown;
@@ -34,5 +35,6 @@ public:
 
 	void updateButtons(sf::Vector2f mousePosition, bool isLeftButtonPressed);
 	void connectToServer();
+	void seeInstructions();
 	void exit();
 };

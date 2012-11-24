@@ -1,6 +1,5 @@
 #include "TextBox.h"
 
-#include "CommonFunctions.h"
 #include "DominionApp.h"
 
 sf::Color TextBox::backgroundColour = sf::Color(24, 24, 24, 100);

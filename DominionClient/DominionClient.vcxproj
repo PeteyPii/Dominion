@@ -93,6 +93,7 @@
     </ManifestResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ClickableButton.cpp" />
     <ClCompile Include="src\Clickable.cpp" />
     <ClCompile Include="src\TextBox.cpp" />
     <ClCompile Include="src\ClickableText.cpp" />
@@ -110,6 +111,7 @@
     <ClCompile Include="src\State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ClickableButton.h" />
     <ClInclude Include="include\Clickable.h" />
     <ClInclude Include="include\ClickableText.h" />
     <ClInclude Include="include\ClientResources.h" />

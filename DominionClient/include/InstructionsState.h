@@ -24,10 +24,10 @@ public:
 	InstructionsState();
 	~InstructionsState();
 
-	void runTextOnly();
+	virtual void runTextOnly();
 
-	void step();
-	void draw();
+	virtual void step();
+	virtual void draw();
 	virtual void eventMouseMoved(sf::Event mouseEvent);
 	virtual void eventMouseButtonPressed(sf::Event mouseEvent);
 	virtual void eventMouseButtonReleased(sf::Event mouseEvent);

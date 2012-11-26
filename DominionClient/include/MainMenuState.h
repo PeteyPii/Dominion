@@ -24,14 +24,14 @@ public:
 	MainMenuState();
 	~MainMenuState();
 
-	void runTextOnly();
+	virtual void runTextOnly();
 
-	void step();
-	void draw();
-	void eventMouseMoved(sf::Event mouseEvent);
-	void eventMouseButtonPressed(sf::Event mouseEvent);
-	void eventMouseButtonReleased(sf::Event mouseEvent);
-	void eventKeyPressed(sf::Event keyEvent);
+	virtual void step();
+	virtual void draw();
+	virtual void eventMouseMoved(sf::Event mouseEvent);
+	virtual void eventMouseButtonPressed(sf::Event mouseEvent);
+	virtual void eventMouseButtonReleased(sf::Event mouseEvent);
+	virtual void eventKeyPressed(sf::Event keyEvent);
 
 	void updateButtons(sf::Vector2f mousePosition, bool isLeftButtonPressed);
 	void connectToServer();

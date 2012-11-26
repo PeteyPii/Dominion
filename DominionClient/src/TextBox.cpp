@@ -2,16 +2,12 @@
 
 #include "DominionApp.h"
 
-sf::Color TextBox::backgroundColour = sf::Color(24, 24, 24, 100);
-sf::Color TextBox::outlineColour = sf::Color::White;
-float TextBox::normalOutlineThickness = 2.0f;
-float TextBox::highlightedOutlineThickness = 3.0f;
 sf::Texture *TextBox::cornerTexture = 0;
 sf::Vector2f TextBox::cornerOriginOffset = sf::Vector2f(5.0f, 5.0f);
 
 using namespace std;
 
-TextBox::TextBox(string text, sf::Vector2f position, sf::Vector2f size, sf::Font *font, unsigned int fontSize)
+TextBox::TextBox(string text, sf::Vector2f position, sf::Vector2f size, sf::Font *font, unsigned int fontSize, bool showCorners, sf::Color backgroundColour, sf::Color outlineColour, float normalOutlineThickness, float highlightedOutlineThickness)
 {
 	if(cornerTexture == 0)
 	{
@@ -48,6 +44,12 @@ TextBox::TextBox(string text, sf::Vector2f position, sf::Vector2f size, sf::Font
 	bottomRightCorner.setScale(-1.0f, -1.0f);
 
 	updateDimensions();
+
+	this->showCorners = showCorners;
+	this->backgroundColour = backgroundColour;
+	this->outlineColour = outlineColour;
+	this->normalOutlineThickness = normalOutlineThickness;
+	this->highlightedOutlineThickness = highlightedOutlineThickness;
 }
 TextBox::~TextBox()
 {
@@ -108,8 +110,12 @@ void TextBox::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(background);
 	target.draw(text);
-	target.draw(topLeftCorner);
-	target.draw(topRightCorner);
-	target.draw(bottomLeftCorner);
-	target.draw(bottomRightCorner);
+
+	if(showCorners)
+	{
+		target.draw(topLeftCorner);
+		target.draw(topRightCorner);
+		target.draw(bottomLeftCorner);
+		target.draw(bottomRightCorner);
+	}
 }

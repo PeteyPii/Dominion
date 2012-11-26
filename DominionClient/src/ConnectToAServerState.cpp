@@ -269,6 +269,8 @@ void ConnectToAServerState::updateButtonsAndTextBoxes(sf::Vector2f mousePosition
 void ConnectToAServerState::connect()
 {
 	app->gameplayState->setConnectionDetails(playerNameTextBox.text.getString(), ipAddressTextBox.text.getString(), portNumberTextBox.text.getString());
+	connectText.resetStates();
+	app->currentState = app->gameplayState;
 }
 void ConnectToAServerState::back()
 {

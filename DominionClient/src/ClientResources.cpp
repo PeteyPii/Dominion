@@ -12,6 +12,7 @@ void ClientResources::loadResources()
 {
 	backgroundCastle.loadFromFile("resources/images/castle_background.jpg");
 	textBoxCorner.loadFromFile("resources/images/cross.png");
+	xButton.loadFromFile("resources/images/x.png");
 
 	cards[0].loadFromFile("resources/images/adventurer.jpg");
 	cards[1].loadFromFile("resources/images/bureaucrat.jpg");
@@ -48,4 +49,5 @@ void ClientResources::loadResources()
 	cards[32].loadFromFile("resources/images/card_back.jpg");
 
 	deutschFont.loadFromFile("resources/fonts/Deutsch.ttf");
+	timesFont.loadFromFile("resources/fonts/times.ttf");
 }

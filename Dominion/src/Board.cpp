@@ -85,7 +85,7 @@ void Board::initializeGame(int numberOfDecks, int cardsPerDeck, int maxKingdomDe
 	{
 		victoryPointDecks.push_back(OrderedDeck());
 
-		for(int jj = 0; jj < 1; jj++)
+		for(int jj = 0; jj < numberOfVictoryCards; jj++)
 		{
 			victoryPointDecks[ii].addCard(victoryPointCards.cards[ii]);
 		}

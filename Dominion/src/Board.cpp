@@ -14,7 +14,7 @@ Board* Board::boardGame = 0;
 
 void Board::deckDepleted()
 {
-	boardGame->recreatePurchasableCards();
+	//boardGame->recreatePurchasableCards();
 }
 void Board::lastVictoryPointCardDrawn()
 {
@@ -85,7 +85,7 @@ void Board::initializeGame(int numberOfDecks, int cardsPerDeck, int maxKingdomDe
 	{
 		victoryPointDecks.push_back(OrderedDeck());
 
-		for(int jj = 0; jj < numberOfVictoryCards; jj++)
+		for(int jj = 0; jj < 1; jj++)
 		{
 			victoryPointDecks[ii].addCard(victoryPointCards.cards[ii]);
 		}
@@ -173,11 +173,16 @@ void Board::beginGame()
 		}
 
 		players[cyclePlayerNumber(turn)]->playTurn();
+		players[cyclePlayerNumber(turn)]->broadcastToOtherPlayers(string("\n"));
+		boardGame->recreatePurchasableCards();
 
 		turn++;
 	}
 
-	endGame();
+	for(unsigned int ii = 0; ii < players.size(); ii++)
+	{
+		players[ii]->sendGameOverMessage();
+	}
 }
 void Board::endGame()
 {
@@ -212,10 +217,7 @@ void Board::endGame()
 	globalOutput << players[winningPlayer]->name << "  won the game with " << highestScore << " point" << pluralPoints <<  "." << endl;
 	players[winningPlayer]->broadcastToOtherPlayers(globalOutput.str());
 
-	for(unsigned int ii = 0; ii < players.size(); ii++)
-	{
-		players[ii]->sendGameOverMessage();
-	}
+	gameIsOver = true;
 }
 OrderedDeck& Board::getPurchasableCards()
 {

@@ -19,7 +19,7 @@ void MainMenuState::runState()
 {
 	while(true)
 	{
-		CommonFunctions::ClearScreen();
+		CommonFunctions::clearScreen();
 
 		cout << "______________________" << endl;
 		cout << "|                    |" << endl;

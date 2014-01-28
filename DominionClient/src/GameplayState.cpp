@@ -21,7 +21,7 @@ GameplayState::~GameplayState()
 }
 void GameplayState::runState()
 {
-	CommonFunctions::ClearScreen();
+	CommonFunctions::clearScreen();
 
 	string name, ipAddressString, port;
 	unsigned short portNumber = 4521;
@@ -108,7 +108,7 @@ void GameplayState::runState()
 
 			if(decisionResult == 0)	// Yes
 			{
-				CommonFunctions::ClearScreen();
+				CommonFunctions::clearScreen();
 			}
 			else	// No
 			{
@@ -124,7 +124,7 @@ void GameplayState::runState()
 
 	if(connectionSuccessful)
 	{
-		CommonFunctions::ClearScreen();
+		CommonFunctions::clearScreen();
 
 		sf::Packet namePacket;
 		namePacket << name;
@@ -141,7 +141,11 @@ void GameplayState::runState()
 
 			if(packetID == PacketID::GAME_OVER)
 			{
-				cout << "Game is finished. Returning to main menu." << endl;
+				cout << "Game is finished. Press enter to return to the main menu." << endl;
+
+				string buffer;
+				getline(cin, buffer);
+
 				return;
 			}
 			else if(packetID == PacketID::STANDARD_MESSAGE)
@@ -169,7 +173,7 @@ void GameplayState::runState()
 			}
 			else if(packetID == PacketID::CLEAR_SCREEN)
 			{
-				CommonFunctions::ClearScreen();
+				CommonFunctions::clearScreen();
 			}
 		}
 

@@ -7,5 +7,5 @@ private:
 	~CommonFunctions();
 
 public:
-	static void ClearScreen();
+	static void clearScreen();
 };

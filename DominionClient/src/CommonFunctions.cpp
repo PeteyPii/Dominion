@@ -19,7 +19,7 @@ CommonFunctions::~CommonFunctions()
 {
 
 }
-void CommonFunctions::ClearScreen()
+void CommonFunctions::clearScreen()
 {
 #ifdef WIN32
 	HANDLE                     hStdOut;

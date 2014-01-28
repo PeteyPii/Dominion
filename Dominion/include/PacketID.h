@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SFML/System.hpp>
-
 class PacketID
 {
 private:
@@ -9,8 +7,8 @@ private:
 	~PacketID();
 
 public:
-	static const sf::Uint16 GAME_OVER;
-	static const sf::Uint16 STANDARD_MESSAGE;
-	static const sf::Uint16 CLEAR_SCREEN;
+	static const unsigned short GAME_OVER;
+	static const unsigned short STANDARD_MESSAGE;
+	static const unsigned short CLEAR_SCREEN;
 };
 

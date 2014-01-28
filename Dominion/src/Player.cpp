@@ -132,7 +132,9 @@ void Player::playActions()
 {
 	bool wantsToDoSomething = true;
 
-	while(actions > 0 && wantsToDoSomething)
+	Board *board = Board::boardGame;
+
+	while(actions > 0 && wantsToDoSomething && !board->gameIsOver)
 	{
 		vector<Card*> actionCards = hand.getListOfCardsMatchingType(Card::ACTION_TYPE);
 
@@ -202,7 +204,7 @@ void Player::playActions()
 		}
 	}
 
-	if(actions < 1)	// No more actions left
+	if(actions < 1 && !board->gameIsOver)	// No more actions left
 	{
 		stringstream output;
 		output << "You have no more ACTIONS, proceeding to the next phase." << endl << endl;
@@ -213,7 +215,9 @@ void Player::useBuys()
 {
 	bool wantsToPlayTreasures = true;
 
-	while(wantsToPlayTreasures)
+	Board *board = Board::boardGame;
+
+	while(wantsToPlayTreasures && !board->gameIsOver)
 	{
 		outputPlayerStatus();
 
@@ -294,13 +298,11 @@ void Player::useBuys()
 		}
 	}
 
-	Board *board = Board::boardGame;
-
 	OrderedDeck &purchasableCards = board->getPurchasableCards();
 
 	bool wantsToBuy = true;
 
-	while(buys > 0 && wantsToBuy)
+	while(buys > 0 && wantsToBuy && !board->gameIsOver)
 	{
 		outputStats();
 
@@ -414,7 +416,7 @@ void Player::useBuys()
 		}
 	}
 
-	if(buys < 1)	// No more buys left
+	if(buys < 1 && !board->gameIsOver)	// No more buys left
 	{
 		stringstream output;
 		output << "You have no more BUYS, cleaning up." << endl;
@@ -423,20 +425,23 @@ void Player::useBuys()
 }
 void Player::turnEnd()
 {
-	discardCleanupPileAndObtainedPile();
-	drawNewHand();
+	if(!Board::boardGame->gameIsOver)
+	{
+		discardCleanupPileAndObtainedPile();
+		drawNewHand();
 
-	stringstream firstOutput;
-	firstOutput << "You have drawn new cards." << endl;
-	displayMessage(firstOutput.str(), false);
+		stringstream firstOutput;
+		firstOutput << "You have drawn new cards." << endl;
+		displayMessage(firstOutput.str(), false);
 
-	outputHand();
+		outputHand();
 
-	stringstream output;
-	output << "Press enter to end your turn." << endl;
-	displayMessage(output.str(), true);
+		stringstream output;
+		output << "Press enter to end your turn." << endl;
+		displayMessage(output.str(), true);
 
-	getInput();	// Press enter to continue
+		getInput();	// Press enter to continue
+	}	
 }
 void Player::discardHand()
 {

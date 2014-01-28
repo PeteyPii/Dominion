@@ -1,7 +1,5 @@
 #include "CommonFunctions.h"
 
-#include <SFML/Window.hpp>
-
 #ifdef WIN32
 
 #include <windows.h>
@@ -61,16 +59,4 @@ void CommonFunctions::clearScreen()
 
 	putp(tigetstr("clear"));
 #endif
-}
-void CommonFunctions::drawRectangle(sf::RenderTarget &target, sf::FloatRect rect)
-{
-	sf::Vertex vertex[5];
-
-	vertex[0] = sf::Vertex(sf::Vector2f(rect.left, rect.top), sf::Color::Magenta);
-	vertex[1] = sf::Vertex(sf::Vector2f(rect.left + rect.width, rect.top), sf::Color::Magenta);
-	vertex[2] = sf::Vertex(sf::Vector2f(rect.left + rect.width, rect.top + rect.height), sf::Color::Magenta);
-	vertex[3] = sf::Vertex(sf::Vector2f(rect.left, rect.top + rect.height), sf::Color::Magenta);
-	vertex[4] = sf::Vertex(sf::Vector2f(rect.left, rect.top), sf::Color::Magenta);
-
-	target.draw(vertex, 5, sf::LinesStrip);
 }

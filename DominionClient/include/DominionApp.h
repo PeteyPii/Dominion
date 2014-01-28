@@ -1,37 +1,20 @@
 #pragma once
 
-#include "ClientResources.h"
-
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-
-class ConnectToAServerState;
-class GameplayState;
-class InstructionsState;
-class MainMenuState;
-class State;
+#include "GameplayState.h"
+#include "InstructionsState.h"
+#include "MainMenuState.h"
 
 class DominionApp
 {
 public:
 	static DominionApp *dominionApp;
 
-	ClientResources resources;
-
-	MainMenuState *mainMenuState;
-	ConnectToAServerState *connectToAServerState;
-	GameplayState *gameplayState;
-	InstructionsState *instructionsState;
-
-	State *currentState;
-
-	sf::RenderWindow *window;
-
-	bool keepRunning;
+	MainMenuState mainMenuState;
+	GameplayState gameplayState;
+	InstructionsState instructionsState;
 
 	DominionApp();
 	~DominionApp();
 
 	void begin();
-	void stop();
 };
